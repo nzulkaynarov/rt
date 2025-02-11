@@ -1,0 +1,28 @@
+name: Deploy to Google Cloud Storage
+
+on:
+  push:
+    branches:
+      - main  # Если у тебя другая ветка, измени здесь
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout репозитория
+        uses: actions/checkout@v3
+
+      - name: Установка Google Cloud SDK
+        run: |
+          echo "${{ secrets.GCS_KEY }}" > gcs-key.json
+          gcloud auth activate-service-account --key-file=gcs-key.json
+          gcloud config set project railtechvm
+
+      - name: Загрузка файлов в Google Storage
+        run: |
+          gsutil -m rsync -r . gs://${{ secrets.GCS_BUCKET }}
+
+      - name: Очистка кэша
+        run: |
+          gsutil -m setmeta -h "Cache-Control:no-cache, max-age=0" gs://${{ secrets.GCS_BUCKET }}/**
