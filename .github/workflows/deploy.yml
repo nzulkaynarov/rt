@@ -21,8 +21,8 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
-          project_id: 'railtechvm'
+          project_id: 'YOUR_PROJECT_ID'
 
       - name: Upload to GCS
         run: |
-          gsutil -m rsync -r . gs://${{ secrets.GCS_BUCKET }}
+        gsutil -m rsync -r -x '(^|/)\.|.*\.json$' . gs://${{ secrets.GCS_BUCKET }}
