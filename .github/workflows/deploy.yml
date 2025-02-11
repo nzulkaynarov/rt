@@ -13,12 +13,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+      - id: auth
+        uses: google-github-actions/auth@v2
         with:
-          service_account_key: ${{ secrets.GCS_KEY }}
-          export_default_credentials: true
+          credentials_json: '${{ secrets.GCS_KEY }}'
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: 'railtechvm'
 
       - name: Upload to GCS
         run: |
-          gsutil rsync -r . gs://${{ secrets.GCS_BUCKET }}
+          gsutil -m rsync -r . gs://${{ secrets.GCS_BUCKET }}
