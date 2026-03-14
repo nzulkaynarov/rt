@@ -184,16 +184,30 @@
     let currentLang = DEFAULT_LANG;
     let translations = {};
 
+    /**
+     * Resolve the base path to locales/ relative to where i18n.js sits.
+     * Works from any page depth (root, pages/, etc.)
+     */
+    var localeBase = (function () {
+        try {
+            var scripts = document.querySelectorAll('script[src*="i18n.js"]');
+            var src = scripts[scripts.length - 1].getAttribute('src');       // e.g. "../js/i18n.js"
+            var jsDir = src.substring(0, src.lastIndexOf('/') + 1);          // "../js/"
+            return jsDir + '../locales/';                                     // "../locales/"
+        } catch (e) {
+            return 'locales/';
+        }
+    })();
+
     /** Try to load locale from JSON; fall back to inline */
     async function loadLocale(lang) {
         if (!SUPPORTED.includes(lang)) lang = DEFAULT_LANG;
         try {
-            // Relative path — works in file://, GitHub Pages, and nginx
-            const resp = await fetch('locales/' + lang + '.json');
+            var resp = await fetch(localeBase + lang + '.json');
             if (!resp.ok) throw new Error('HTTP ' + resp.status);
-            const data = await resp.json();
+            var data = await resp.json();
             return Object.assign({}, INLINE[lang] || {}, data); // JSON wins over inline
-        } catch {
+        } catch (e) {
             // file:// protocol or missing file → use inline
             return INLINE[lang] || INLINE[DEFAULT_LANG];
         }
