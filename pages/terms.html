@@ -367,7 +367,7 @@
     // Show/hide [data-lang] blocks
     function updateLangBlocks(lang) {
         document.querySelectorAll('[data-lang]').forEach(function(el) {
-            el.style.display = el.dataset.lang === lang ? '' : 'none';
+            el.style.display = el.dataset.lang === lang ? 'block' : 'none';
         });
     }
     // Sync all lang-switcher selects to current lang
@@ -386,12 +386,12 @@
     // Connect every select dropdown to the i18n engine
     document.querySelectorAll('.js-lang-switcher').forEach(function(sel) {
         sel.addEventListener('change', function() {
-            if (window.i18n && window.i18n.setLang) window.i18n.setLang(sel.value);
+            if (window.i18n && window.i18n.setLanguage) window.i18n.setLanguage(sel.value);
         });
     });
     // Apply correct language immediately on page load
     (function() {
-        var lang = (window.i18n && window.i18n.lang) || localStorage.getItem('railtech_lang') || 'ru';
+        var lang = (window.i18n && window.i18n.getCurrentLang && window.i18n.getCurrentLang()) || localStorage.getItem('railtech_lang') || 'ru';
         updateLangBlocks(lang);
         syncSelects(lang);
         document.documentElement.lang = lang;
