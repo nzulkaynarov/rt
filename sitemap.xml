@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- ── Landing page (default: Russian) ── -->
+  <url>
+    <loc>https://railtech.uz/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/"/>
+    <xhtml:link rel="alternate" hreflang="en"       href="https://railtech.uz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="uz"       href="https://railtech.uz/?lang=uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://railtech.uz/"/>
+  </url>
+
+  <!-- ── Landing page explicit lang variants ── -->
+  <url>
+    <loc>https://railtech.uz/?lang=en</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/"/>
+    <xhtml:link rel="alternate" hreflang="en"       href="https://railtech.uz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="uz"       href="https://railtech.uz/?lang=uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://railtech.uz/"/>
+  </url>
+
+  <url>
+    <loc>https://railtech.uz/?lang=uz</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/"/>
+    <xhtml:link rel="alternate" hreflang="en"       href="https://railtech.uz/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="uz"       href="https://railtech.uz/?lang=uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://railtech.uz/"/>
+  </url>
+
+  <!-- ── Privacy Policy ── -->
+  <url>
+    <loc>https://railtech.uz/pages/privacy.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/pages/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="en"       href="https://railtech.uz/pages/privacy.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="uz"       href="https://railtech.uz/pages/privacy.html?lang=uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://railtech.uz/pages/privacy.html"/>
+  </url>
+
+  <!-- ── Terms of Use ── -->
+  <url>
+    <loc>https://railtech.uz/pages/terms.html</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/pages/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="en"       href="https://railtech.uz/pages/terms.html?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="uz"       href="https://railtech.uz/pages/terms.html?lang=uz"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://railtech.uz/pages/terms.html"/>
+  </url>
+
+</urlset>

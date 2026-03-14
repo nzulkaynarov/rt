@@ -1,0 +1,9 @@
+<svg width="180" height="56" viewBox="0 0 180 56" xmlns="http://www.w3.org/2000/svg">
+  <!-- Siemens S-mark inspired diagonal bars -->
+  <rect x="8" y="14" width="36" height="7" rx="3.5" fill="#009999"/>
+  <rect x="8" y="24.5" width="36" height="7" rx="3.5" fill="#009999"/>
+  <rect x="8" y="35" width="36" height="7" rx="3.5" fill="#009999"/>
+  <!-- Brand text -->
+  <text x="56" y="25" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="15" fill="#1a1a1a" letter-spacing="1.5">SIEMENS</text>
+  <text x="56" y="40" font-family="Arial,Helvetica,sans-serif" font-size="9" fill="#009999" letter-spacing="0.8">MOBILITY</text>
+</svg>

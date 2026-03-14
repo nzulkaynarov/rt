@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Страница не найдена | RailTech</title>
+    <meta name="description" content="Страница не найдена. Вернитесь на главную страницу RailTech.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://railtech.uz/404.html">
+    <link rel="icon" href="images/logo-filled.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="images/logo-filled.svg">
+    <meta name="theme-color" content="#0f172a">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    keyframes: {
+                        fadeUp: { '0%': { opacity: '0', transform: 'translateY(24px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+                        float:  { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-10px)' } },
+                    },
+                    animation: {
+                        'fade-up': 'fadeUp 0.6s ease-out both',
+                        'float':   'float 3.5s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .lang-select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e"); background-repeat:no-repeat; background-position:right 0.4rem center; background-size:1em; }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white antialiased min-h-screen flex flex-col">
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 py-4">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4">
+        <a href="index.html" class="flex items-center gap-2.5 shrink-0" aria-label="RailTech — на главную">
+            <img src="images/logo-filled.svg" alt="" class="h-8 w-8" aria-hidden="true">
+            <span class="text-lg font-bold">Rail<span class="text-blue-400">Tech</span></span>
+        </a>
+        <div class="flex items-center gap-3">
+            <select class="lang-select js-lang-switcher hidden sm:block bg-transparent text-slate-400 text-sm py-1.5 pl-2 pr-7 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 cursor-pointer transition" aria-label="Язык">
+                <option value="ru">🇷🇺 Ru</option>
+                <option value="en">🇬🇧 En</option>
+                <option value="uz">🇺🇿 Uz</option>
+            </select>
+            <a href="index.html#contacts" class="hidden sm:inline-flex items-center gap-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-i18n="btn_contact">Связаться с нами</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 404 CONTENT -->
+<main class="flex-1 flex items-center justify-center px-5 py-20">
+    <div class="text-center max-w-lg mx-auto">
+
+        <!-- Animated 404 number -->
+        <div class="relative mb-8 animate-float" aria-hidden="true">
+            <div class="text-[9rem] sm:text-[11rem] font-extrabold leading-none select-none"
+                 style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 50%, #60a5fa 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
+                404
+            </div>
+            <!-- Glow -->
+            <div class="absolute inset-0 blur-3xl opacity-20 pointer-events-none"
+                 style="background: radial-gradient(circle, #3b82f6 0%, transparent 70%);"></div>
+        </div>
+
+        <!-- Message -->
+        <div class="animate-fade-up" style="animation-delay:0.15s">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-white mb-3" data-i18n="err_title">
+                Страница не найдена
+            </h1>
+            <p class="text-slate-400 text-base mb-10 leading-relaxed" data-i18n="err_desc">
+                Возможно, ссылка устарела или страница была перемещена. Вернитесь на главную и начните сначала.
+            </p>
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay:0.3s">
+            <a href="index.html"
+               class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold px-8 py-3.5 rounded-xl transition shadow-lg shadow-blue-900/40"
+               data-i18n="err_home">
+                ← На главную
+            </a>
+            <a href="index.html#contacts"
+               class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/15 font-bold px-8 py-3.5 rounded-xl transition backdrop-blur-sm"
+               data-i18n="btn_contact">
+                Связаться с нами
+            </a>
+        </div>
+
+        <!-- Quick links -->
+        <div class="mt-12 animate-fade-up" style="animation-delay:0.45s">
+            <p class="text-slate-500 text-sm mb-4" data-i18n="err_quick">Популярные разделы</p>
+            <div class="flex flex-wrap justify-center gap-2">
+                <a href="index.html#about"    class="text-xs font-medium text-slate-400 hover:text-blue-400 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full transition" data-i18n="nav_about">О компании</a>
+                <a href="index.html#services" class="text-xs font-medium text-slate-400 hover:text-blue-400 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full transition" data-i18n="nav_services">Услуги</a>
+                <a href="index.html#platform" class="text-xs font-medium text-slate-400 hover:text-blue-400 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full transition" data-i18n="nav_platform">Платформа</a>
+                <a href="index.html#faq"      class="text-xs font-medium text-slate-400 hover:text-blue-400 bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-full transition" data-i18n="nav_faq">FAQ</a>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER (minimal) -->
+<footer class="border-t border-slate-800 py-8 px-5">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-600">
+        <span data-i18n="footer_copy">© 2021–2026 ООО «RailTech». Все права защищены.</span>
+        <div class="flex items-center gap-5">
+            <a href="pages/privacy.html" class="hover:text-slate-400 transition" data-i18n="footer_privacy">Политика конфиденциальности</a>
+            <a href="pages/terms.html"   class="hover:text-slate-400 transition" data-i18n="footer_terms">Условия использования</a>
+        </div>
+    </div>
+</footer>
+
+<script src="js/i18n.js"></script>
+<script>
+    // Add 404-specific translation keys if i18n didn't load them
+    document.addEventListener('langchange', () => {
+        const t = window.i18n?.t || (k => k);
+        // i18n handles data-i18n attrs automatically; no extra logic needed
+    });
+</script>
+<script src="js/cookie-consent.js"></script>
+</body>
+</html>

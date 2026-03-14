@@ -1,0 +1,7 @@
+<svg width="180" height="56" viewBox="0 0 180 56" xmlns="http://www.w3.org/2000/svg">
+  <!-- W mark -->
+  <polyline points="8,14 18,42 28,22 38,42 48,14" fill="none" stroke="#1C2B5A" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Brand text -->
+  <text x="60" y="27" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="16" fill="#1C2B5A" letter-spacing="1.5">WABTEC</text>
+  <text x="60" y="42" font-family="Arial,Helvetica,sans-serif" font-size="8.5" fill="#666666" letter-spacing="0.5">ALWAYS THINKING FORWARD</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg width="180" height="56" viewBox="0 0 180 56" xmlns="http://www.w3.org/2000/svg">
+  <!-- A-mark with speed lines -->
+  <polygon points="28,10 44,46 34,46 28,30 22,46 12,46" fill="none" stroke="#003087" stroke-width="2.5" stroke-linejoin="round"/>
+  <line x1="16" y1="38" x2="40" y2="38" stroke="#003087" stroke-width="2.5"/>
+  <!-- Brand text -->
+  <text x="56" y="28" font-family="Georgia,serif" font-weight="700" font-size="18" fill="#003087" letter-spacing="1">alstom</text>
+  <text x="56" y="43" font-family="Arial,Helvetica,sans-serif" font-size="8.5" fill="#666666" letter-spacing="0.5">RAIL TRANSPORT</text>
+</svg>

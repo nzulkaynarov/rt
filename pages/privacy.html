@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности | RailTech</title>
+    <meta name="description" content="Политика конфиденциальности ООО «RailTech» — как мы собираем, используем и защищаем ваши персональные данные.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://railtech.uz/pages/privacy.html">
+    <meta property="og:title" content="Политика конфиденциальности | RailTech">
+    <meta property="og:url" content="https://railtech.uz/pages/privacy.html">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="../images/logo-filled.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="../images/logo-filled.svg">
+    <meta name="theme-color" content="#0f172a">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+                    typography: {}
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .lang-select { appearance: none; background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3e%3cpolyline points='6 9 12 15 18 9'/%3e%3c/svg%3e"); background-repeat:no-repeat; background-position:right 0.4rem center; background-size:1em; }
+        /* Hide non-Russian blocks by default; JS will show the active one */
+        [data-lang="en"], [data-lang="uz"] { display: none; }
+        /* Prose styling */
+        .prose-legal h2 { font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-top: 2.25rem; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
+        .prose-legal h3 { font-size: 0.975rem; font-weight: 600; color: #1e293b; margin-top: 1.25rem; margin-bottom: 0.4rem; }
+        .prose-legal p  { color: #475569; font-size: 0.9rem; line-height: 1.75; margin-bottom: 0.75rem; }
+        .prose-legal ul { list-style: none; padding: 0; margin-bottom: 0.75rem; }
+        .prose-legal ul li { color: #475569; font-size: 0.9rem; line-height: 1.7; padding-left: 1.25rem; position: relative; margin-bottom: 0.3rem; }
+        .prose-legal ul li::before { content: '—'; position: absolute; left: 0; color: #3b82f6; font-weight: 700; }
+        .prose-legal a { color: #2563eb; text-decoration: underline; }
+        .prose-legal a:hover { color: #1d4ed8; }
+    </style>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+<!-- ── NAV ───────────────────────────────────────── -->
+<nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 py-4">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4">
+        <a href="../index.html" class="flex items-center gap-2.5 shrink-0" aria-label="RailTech — На главную">
+            <img src="../images/logo-filled.svg" alt="" class="h-8 w-8" aria-hidden="true">
+            <span class="text-lg font-bold text-slate-900">Rail<span class="text-blue-600">Tech</span></span>
+        </a>
+        <div class="hidden lg:flex items-center gap-1 text-sm font-medium">
+            <a href="../index.html#about"    class="px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition" data-i18n="nav_about">О компании</a>
+            <a href="../index.html#services" class="px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition" data-i18n="nav_services">Услуги</a>
+            <a href="../index.html#platform" class="px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition" data-i18n="nav_platform">Платформа</a>
+            <a href="../index.html#faq"      class="px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition" data-i18n="nav_faq">FAQ</a>
+            <a href="../index.html#contacts" class="px-3 py-2 text-slate-500 hover:text-slate-900 hover:bg-slate-50 rounded-lg transition" data-i18n="nav_contacts">Контакты</a>
+        </div>
+        <div class="flex items-center gap-3">
+            <select class="lang-select js-lang-switcher hidden sm:block bg-transparent text-slate-500 text-sm py-1.5 pl-2 pr-7 rounded-lg border border-slate-200 hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500/30 cursor-pointer transition" aria-label="Язык">
+                <option value="ru">🇷🇺 Ru</option>
+                <option value="en">🇬🇧 En</option>
+                <option value="uz">🇺🇿 Uz</option>
+            </select>
+            <a href="https://cabinet.railtech.uz" class="hidden sm:flex items-center gap-2 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-lg hover:bg-blue-700 transition" data-i18n="nav_cabinet">Войти</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ── PAGE HEADER ──────────────────────────────── -->
+<div class="bg-slate-50 border-b border-slate-100 py-12">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+        <div class="flex items-center gap-2 text-blue-600 text-xs font-bold uppercase tracking-widest mb-3 bg-blue-50 w-fit px-3 py-1.5 rounded-full">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+            <span data-i18n="footer_privacy">Политика конфиденциальности</span>
+        </div>
+        <div data-lang="ru">
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Политика конфиденциальности</h1>
+            <p class="text-slate-500 text-sm">ООО «RailTech» · Последнее обновление: январь 2025 · Версия 1.0</p>
+        </div>
+        <div data-lang="en">
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Privacy Policy</h1>
+            <p class="text-slate-500 text-sm">LLC RailTech · Last updated: January 2025 · Version 1.0</p>
+        </div>
+        <div data-lang="uz">
+            <h1 class="text-3xl font-extrabold text-slate-900 mb-2">Maxfiylik siyosati</h1>
+            <p class="text-slate-500 text-sm">«RailTech» MChJ · Oxirgi yangilanish: 2025-yil yanvar · 1.0-versiya</p>
+        </div>
+    </div>
+</div>
+
+<!-- ── CONTENT ──────────────────────────────────── -->
+<main class="py-12 pb-20">
+    <div class="max-w-3xl mx-auto px-5 lg:px-8">
+
+        <!-- ════════════ RUSSIAN ════════════ -->
+        <article class="prose-legal" data-lang="ru">
+
+            <h2>1. Общие положения</h2>
+            <p>Настоящая Политика конфиденциальности (далее — «Политика») определяет порядок обработки и защиты персональных данных пользователей сайта <a href="https://railtech.uz">railtech.uz</a> и B2B-платформы <a href="https://b2b.railtech.uz">b2b.railtech.uz</a> (далее — «Сервис»), принадлежащих ООО «RailTech» (далее — «Компания»).</p>
+            <p>Компания руководствуется Законом Республики Узбекистан «О персональных данных» от 02.07.2019 № ЗРУ-547 и иными нормативными актами в сфере защиты информации.</p>
+            <p>Используя Сервис, вы подтверждаете, что ознакомились с настоящей Политикой и даёте согласие на обработку ваших данных в описанных целях.</p>
+
+            <h2>2. Какие данные мы собираем</h2>
+            <h3>2.1 Данные, которые вы предоставляете добровольно</h3>
+            <ul>
+                <li>Контактные данные: имя, фамилия, должность, рабочий email, номер телефона;</li>
+                <li>Данные компании: наименование организации, ИНН/ОГРНИП, юридический и фактический адрес;</li>
+                <li>Банковские реквизиты и документы KYC — исключительно для верификации партнёров и исполнения договоров поставки;</li>
+                <li>Сообщения, отправленные через форму обратной связи на сайте.</li>
+            </ul>
+            <h3>2.2 Данные, собираемые автоматически</h3>
+            <ul>
+                <li>Языковые предпочтения (сохраняются в localStorage браузера — не передаются на сервер);</li>
+                <li>IP-адрес, тип и версия браузера, операционная система — при подключении аналитических инструментов с вашего согласия;</li>
+                <li>Страницы посещений и время на сайте — при активированной аналитике.</li>
+            </ul>
+
+            <h2>3. Цели обработки данных</h2>
+            <ul>
+                <li>Регистрация, идентификация и верификация партнёров (процедура KYC);</li>
+                <li>Формирование, согласование и исполнение договоров поставки;</li>
+                <li>Отправка коммерческих предложений, счётов и закрывающих документов;</li>
+                <li>Техническая поддержка и ответы на запросы пользователей;</li>
+                <li>Улучшение функциональности Сервиса и пользовательского опыта;</li>
+                <li>Соблюдение требований законодательства Республики Узбекистан.</li>
+            </ul>
+
+            <h2>4. Передача данных третьим лицам</h2>
+            <p>Компания не продаёт персональные данные. Передача возможна только:</p>
+            <ul>
+                <li>Логистическим партнёрам и транспортно-экспедиционным компаниям — для организации доставки;</li>
+                <li>Таможенным брокерам и уполномоченным органам — для таможенного оформления;</li>
+                <li>Банкам и платёжным системам — для проведения расчётов по договорам;</li>
+                <li>Государственным органам — по требованию законодательства или решению суда;</li>
+                <li>Облачным провайдерам и IT-партнёрам — исключительно для технического обеспечения Сервиса, при наличии соглашений о конфиденциальности.</li>
+            </ul>
+
+            <h2>5. Cookie-файлы и локальное хранилище</h2>
+            <p>Сайт использует <strong>localStorage</strong> браузера для хранения языковых предпочтений пользователя (ключ <code>railtech_lang</code>) и настроек согласия с куки (ключ <code>railtech_cookie_consent</code>). Эти данные не передаются третьим лицам и хранятся исключительно на устройстве пользователя.</p>
+            <p>HTTP cookie-файлы (трекинговые куки) применяются только при подключении аналитических инструментов (например, Google Analytics) и только с вашего явного согласия, выраженного через баннер на сайте. Вы можете в любой момент отозвать согласие, очистив localStorage в настройках браузера.</p>
+
+            <h2>6. Сроки хранения данных</h2>
+            <p>Персональные данные хранятся на защищённых серверах в течение срока действия договорных отношений и <strong>5 лет</strong> после их завершения, если иное не предусмотрено законодательством или не потребуется для разрешения споров.</p>
+            <p>Данные, полученные через форму обратной связи, хранятся не более <strong>3 лет</strong> с момента последнего обращения.</p>
+
+            <h2>7. Права субъектов персональных данных</h2>
+            <p>Вы имеете право:</p>
+            <ul>
+                <li>Получить информацию о составе, целях и способах обработки ваших данных;</li>
+                <li>Потребовать исправления неточных или устаревших данных;</li>
+                <li>Потребовать удаления данных (право на забвение) — при условии отсутствия законных оснований для их хранения;</li>
+                <li>Отозвать согласие на обработку — это не затрагивает законность обработки до момента отзыва;</li>
+                <li>Подать жалобу в уполномоченный орган по защите персональных данных Республики Узбекистан.</li>
+            </ul>
+            <p>Для реализации прав направьте запрос на <a href="mailto:privacy@railtech.uz">privacy@railtech.uz</a>. Срок ответа — 10 рабочих дней.</p>
+
+            <h2>8. Меры защиты информации</h2>
+            <p>Компания применяет организационные и технические меры защиты: шифрование данных при передаче (HTTPS/TLS), ограничение доступа к данным по ролям (RBAC), регулярные проверки безопасности и инструктаж сотрудников.</p>
+
+            <h2>9. Изменения политики</h2>
+            <p>Компания вправе вносить изменения в настоящую Политику. Актуальная версия всегда доступна по адресу <a href="https://railtech.uz/pages/privacy.html">railtech.uz/privacy.html</a>. Дата последнего обновления указана в шапке документа. Продолжение использования Сервиса после изменений означает принятие обновлённой версии.</p>
+
+            <h2>10. Контактная информация</h2>
+            <p>По вопросам обработки персональных данных обращайтесь:</p>
+            <ul>
+                <li>Организация: ООО «RailTech», г. Ташкент, Республика Узбекистан</li>
+                <li>Email: <a href="mailto:privacy@railtech.uz">privacy@railtech.uz</a></li>
+                <li>Телефон: <a href="tel:+998901189000">+998 90 118-90-00</a></li>
+            </ul>
+        </article>
+
+        <!-- ════════════ ENGLISH ════════════ -->
+        <article class="prose-legal" data-lang="en">
+
+            <h2>1. General Provisions</h2>
+            <p>This Privacy Policy (the "Policy") governs the processing and protection of personal data of users of <a href="https://railtech.uz">railtech.uz</a> and the B2B platform <a href="https://b2b.railtech.uz">b2b.railtech.uz</a> (the "Service") operated by LLC RailTech (the "Company").</p>
+            <p>The Company complies with the Law of the Republic of Uzbekistan "On Personal Data" No. ZRU-547 dated 02.07.2019 and related regulations.</p>
+            <p>By using the Service you confirm that you have read this Policy and consent to the processing of your data for the purposes described herein.</p>
+
+            <h2>2. Data We Collect</h2>
+            <h3>2.1 Data you provide voluntarily</h3>
+            <ul>
+                <li>Contact details: name, surname, job title, work email, phone number;</li>
+                <li>Company details: legal name, Tax ID (INN), registered address;</li>
+                <li>Bank details and KYC documents — solely for partner verification and supply contract execution;</li>
+                <li>Messages submitted via the contact form.</li>
+            </ul>
+            <h3>2.2 Data collected automatically</h3>
+            <ul>
+                <li>Language preferences (stored in browser localStorage — not transmitted to our servers);</li>
+                <li>IP address, browser type and version, OS — only when analytics are enabled with your consent;</li>
+                <li>Pages visited and time on site — only when analytics are active.</li>
+            </ul>
+
+            <h2>3. Purposes of Processing</h2>
+            <ul>
+                <li>Partner registration, identification, and KYC verification;</li>
+                <li>Preparation, negotiation, and execution of supply contracts;</li>
+                <li>Sending commercial proposals, invoices, and closing documents;</li>
+                <li>Technical support and responses to user inquiries;</li>
+                <li>Improving Service functionality and user experience;</li>
+                <li>Compliance with applicable laws of the Republic of Uzbekistan.</li>
+            </ul>
+
+            <h2>4. Data Sharing with Third Parties</h2>
+            <p>The Company does not sell personal data. Sharing occurs only with:</p>
+            <ul>
+                <li>Logistics and freight partners — to arrange delivery;</li>
+                <li>Customs brokers and authorities — for customs clearance;</li>
+                <li>Banks and payment systems — for contractual settlements;</li>
+                <li>Government authorities — as required by law or court order;</li>
+                <li>Cloud and IT providers — for technical infrastructure, under confidentiality agreements.</li>
+            </ul>
+
+            <h2>5. Cookies & Local Storage</h2>
+            <p>The site uses browser <strong>localStorage</strong> to store language preferences (<code>railtech_lang</code>) and cookie consent settings (<code>railtech_cookie_consent</code>). This data is not transmitted to third parties and remains solely on your device.</p>
+            <p>HTTP tracking cookies are only used when analytics tools are enabled and only with your explicit consent via the banner on the site. You may withdraw consent at any time by clearing localStorage in your browser settings.</p>
+
+            <h2>6. Data Retention</h2>
+            <p>Personal data is stored on secured servers for the duration of the contractual relationship and for <strong>5 years</strong> thereafter, unless otherwise required by law or dispute resolution needs.</p>
+            <p>Data received via the contact form is retained for no more than <strong>3 years</strong> from the last interaction.</p>
+
+            <h2>7. Your Rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Obtain information about how your data is processed;</li>
+                <li>Request correction of inaccurate or outdated data;</li>
+                <li>Request deletion of your data (right to erasure) — subject to legal retention requirements;</li>
+                <li>Withdraw consent without affecting the lawfulness of prior processing;</li>
+                <li>File a complaint with the data protection authority of the Republic of Uzbekistan.</li>
+            </ul>
+            <p>To exercise your rights, contact <a href="mailto:privacy@railtech.uz">privacy@railtech.uz</a>. Response time: 10 business days.</p>
+
+            <h2>8. Security Measures</h2>
+            <p>The Company applies technical and organizational safeguards: data encryption in transit (HTTPS/TLS), role-based access control (RBAC), regular security audits, and staff training.</p>
+
+            <h2>9. Policy Updates</h2>
+            <p>The Company may update this Policy at any time. The current version is always available at <a href="https://railtech.uz/pages/privacy.html">railtech.uz/privacy.html</a>. Continued use of the Service after changes constitutes acceptance of the updated Policy.</p>
+
+            <h2>10. Contact</h2>
+            <ul>
+                <li>Organization: LLC RailTech, Tashkent, Republic of Uzbekistan</li>
+                <li>Email: <a href="mailto:privacy@railtech.uz">privacy@railtech.uz</a></li>
+                <li>Phone: <a href="tel:+998901189000">+998 90 118-90-00</a></li>
+            </ul>
+        </article>
+
+        <!-- ════════════ UZBEK ════════════ -->
+        <article class="prose-legal" data-lang="uz">
+
+            <h2>1. Umumiy qoidalar</h2>
+            <p>Ushbu Maxfiylik siyosati (bundan buyon — «Siyosat») <a href="https://railtech.uz">railtech.uz</a> sayti va <a href="https://b2b.railtech.uz">b2b.railtech.uz</a> B2B platformasi foydalanuvchilarining shaxsiy ma'lumotlarini «RailTech» MChJ (bundan buyon — «Kompaniya») tomonidan qayta ishlash tartibini belgilaydi.</p>
+            <p>Kompaniya O'zbekiston Respublikasining 2019-yil 2-iyuldagi «Shaxsiy ma'lumotlar to'g'risida»gi ZRU-547-sonli Qonuniga rioya qiladi.</p>
+            <p>Xizmatdan foydalanib, siz ushbu Siyosat bilan tanishganingizni va ma'lumotlaringizni ko'rsatilgan maqsadlarda qayta ishlashga roziligingizni tasdiqlaysiz.</p>
+
+            <h2>2. Biz to'playdigan ma'lumotlar</h2>
+            <h3>2.1 Siz ixtiyoriy ravishda taqdim etadigan ma'lumotlar</h3>
+            <ul>
+                <li>Aloqa ma'lumotlari: ism, familiya, lavozim, ish elektron pochtasi, telefon raqami;</li>
+                <li>Kompaniya ma'lumotlari: nomi, STIR, yuridik manzil;</li>
+                <li>Bank rekvizitlari va KYC hujjatlari — faqat hamkorlarni tekshirish va yetkazib berish shartnomalari uchun;</li>
+                <li>Saytdagi aloqa formasi orqali yuborilgan xabarlar.</li>
+            </ul>
+            <h3>2.2 Avtomatik to'planadigan ma'lumotlar</h3>
+            <ul>
+                <li>Til sozlamalari (brauzer localStorage-da saqlanadi — serverga uzatilmaydi);</li>
+                <li>IP-manzil, brauzer turi va versiyasi, operatsion tizim — faqat roziligingiz bilan tahlil vositalari yoqilganda;</li>
+                <li>Tashrif buyurilgan sahifalar va saytda o'tkazilgan vaqt — faqat tahlil faol bo'lganda.</li>
+            </ul>
+
+            <h2>3. Qayta ishlash maqsadlari</h2>
+            <ul>
+                <li>Hamkorlarni ro'yxatdan o'tkazish, identifikatsiya qilish va KYC tekshiruvi;</li>
+                <li>Yetkazib berish shartnomasini tuzish va bajarish;</li>
+                <li>Tijorat takliflarini, hisob-fakturalarni va yopuvchi hujjatlarni yuborish;</li>
+                <li>Texnik qo'llab-quvvatlash va foydalanuvchilar so'rovlariga javob berish;</li>
+                <li>Xizmat funksionalligini va foydalanuvchi tajribasini yaxshilash;</li>
+                <li>O'zbekiston Respublikasi qonunchiligiga rioya qilish.</li>
+            </ul>
+
+            <h2>4. Uchinchi shaxslarga ma'lumot uzatish</h2>
+            <p>Kompaniya shaxsiy ma'lumotlarni sotmaydi. Uzatish faqat quyidagilarga mumkin:</p>
+            <ul>
+                <li>Logistika hamkorlari — yetkazib berish uchun;</li>
+                <li>Bojxona brokerlari va vakolatli organlar — bojxona rasmiylashtiruvi uchun;</li>
+                <li>Banklar va to'lov tizimlari — shartnomaviy hisob-kitoblar uchun;</li>
+                <li>Davlat organlari — qonun yoki sud qarori asosida;</li>
+                <li>Bulut va IT-provayderlar — maxfiylik shartnomalari asosida texnik ta'minot uchun.</li>
+            </ul>
+
+            <h2>5. Cookie fayllari va mahalliy xotira</h2>
+            <p>Sayt til sozlamalarini (<code>railtech_lang</code>) va cookie roziligini (<code>railtech_cookie_consent</code>) saqlash uchun brauzer <strong>localStorage</strong>-idan foydalanadi. Bu ma'lumotlar uchinchi shaxslarga uzatilmaydi va faqat qurilmangizda saqlanadi.</p>
+            <p>HTTP kuzatuv cookie fayllari faqat sayt bannerida sizning aniq roziligingiz bilan tahlil vositalari yoqilganda qo'llaniladi. Brauzer sozlamalarida localStorage-ni tozalash orqali rozilikni istalgan vaqtda bekor qilish mumkin.</p>
+
+            <h2>6. Ma'lumotlarni saqlash muddatlari</h2>
+            <p>Shaxsiy ma'lumotlar shartnomaviy munosabatlar davomida va ularni tugatganidan keyin <strong>5 yil</strong> mobaynida himoyalangan serverlarda saqlanadi.</p>
+            <p>Aloqa formasi orqali olingan ma'lumotlar oxirgi murojaat sanasidan boshlab <strong>3 yildan</strong> ko'proq saqlanmaydi.</p>
+
+            <h2>7. Foydalanuvchi huquqlari</h2>
+            <p>Siz quyidagi huquqlarga egasiz:</p>
+            <ul>
+                <li>Ma'lumotlaringiz qanday qayta ishlanishi haqida ma'lumot olish;</li>
+                <li>Noto'g'ri yoki eskirgan ma'lumotlarni to'g'rilashni talab qilish;</li>
+                <li>Ma'lumotlaringizni o'chirishni talab qilish — qonuniy saqlash talablari bo'lmagan taqdirda;</li>
+                <li>Rozilikni bekor qilish — bu avvalgi qayta ishlash qonuniyligiga ta'sir qilmaydi;</li>
+                <li>O'zbekiston Respublikasi shaxsiy ma'lumotlarni himoya qilish organiga shikoyat bildirish.</li>
+            </ul>
+            <p>Huquqlaringizni amalga oshirish uchun <a href="mailto:privacy@railtech.uz">privacy@railtech.uz</a> manziliga murojaat qiling. Javob muddati: 10 ish kuni.</p>
+
+            <h2>8. Axborot xavfsizligi</h2>
+            <p>Kompaniya texnik va tashkiliy himoya choralarini qo'llaydi: uzatishda ma'lumotlarni shifrlash (HTTPS/TLS), rollarga asoslangan kirishni boshqarish (RBAC), muntazam xavfsizlik tekshiruvlari va xodimlarni o'qitish.</p>
+
+            <h2>9. Siyosatni yangilash</h2>
+            <p>Kompaniya ushbu Siyosatni istalgan vaqtda o'zgartirish huquqiga ega. Joriy versiya doimo <a href="https://railtech.uz/pages/privacy.html">railtech.uz/privacy.html</a> manzilida mavjud. O'zgartirishlardan so'ng Xizmatdan foydalanishni davom ettirish yangilangan Siyosatni qabul qilishni anglatadi.</p>
+
+            <h2>10. Aloqa</h2>
+            <ul>
+                <li>Tashkilot: «RailTech» MChJ, Toshkent, O'zbekiston Respublikasi</li>
+                <li>Elektron pochta: <a href="mailto:privacy@railtech.uz">privacy@railtech.uz</a></li>
+                <li>Telefon: <a href="tel:+998901189000">+998 90 118-90-00</a></li>
+            </ul>
+        </article>
+
+    </div><!-- /max-w-3xl -->
+</main>
+
+<!-- ── FOOTER ────────────────────────────────────── -->
+<footer class="bg-slate-900 text-slate-400 pt-10 pb-8 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-5 lg:px-8">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 text-sm pb-6 border-b border-slate-800">
+            <div class="flex items-center gap-2.5">
+                <img src="../images/logo-filled.svg" alt="" class="h-7 w-7" aria-hidden="true">
+                <span class="font-bold text-white text-base">Rail<span class="text-blue-400">Tech</span></span>
+            </div>
+            <div class="flex flex-wrap gap-5 text-slate-500">
+                <a href="../index.html" class="hover:text-white transition" data-i18n="err_home">← На главную</a>
+                <a href="terms.html" class="hover:text-white transition" data-i18n="footer_terms">Условия использования</a>
+                <a href="../index.html#contacts" class="hover:text-white transition" data-i18n="nav_contacts">Контакты</a>
+            </div>
+        </div>
+        <div class="pt-5 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600">
+            <span data-i18n="footer_copy">© 2021–2026 ООО «RailTech». Все права защищены.</span>
+            <select class="lang-select js-lang-switcher bg-transparent text-slate-500 text-xs py-1 pl-2 pr-6 rounded border border-slate-700 hover:border-slate-600 focus:outline-none cursor-pointer" aria-label="Язык">
+                <option value="ru" class="bg-slate-900">🇷🇺 Ru</option>
+                <option value="en" class="bg-slate-900">🇬🇧 En</option>
+                <option value="uz" class="bg-slate-900">🇺🇿 Uz</option>
+            </select>
+        </div>
+    </div>
+</footer>
+
+<script src="../js/i18n.js"></script>
+<script>
+    // Show/hide [data-lang] blocks
+    function updateLangBlocks(lang) {
+        document.querySelectorAll('[data-lang]').forEach(function(el) {
+            el.style.display = el.dataset.lang === lang ? '' : 'none';
+        });
+    }
+    // Sync all lang-switcher selects to current lang
+    function syncSelects(lang) {
+        document.querySelectorAll('.js-lang-switcher').forEach(function(sel) {
+            sel.value = lang;
+        });
+    }
+    // React to language change dispatched by i18n.js
+    document.addEventListener('langchange', function(e) {
+        var lang = e.detail && e.detail.lang ? e.detail.lang : 'ru';
+        updateLangBlocks(lang);
+        syncSelects(lang);
+        document.documentElement.lang = lang;
+    });
+    // Connect every select dropdown to the i18n engine
+    document.querySelectorAll('.js-lang-switcher').forEach(function(sel) {
+        sel.addEventListener('change', function() {
+            if (window.i18n && window.i18n.setLang) window.i18n.setLang(sel.value);
+        });
+    });
+    // Apply correct language immediately on page load
+    (function() {
+        var lang = (window.i18n && window.i18n.lang) || localStorage.getItem('railtech_lang') || 'ru';
+        updateLangBlocks(lang);
+        syncSelects(lang);
+        document.documentElement.lang = lang;
+    })();
+</script>
+<script src="../js/cookie-consent.js"></script>
+</body>
+</html>
