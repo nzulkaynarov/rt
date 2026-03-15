@@ -216,229 +216,507 @@
     }
 
     /* ═══════════════════════════════════════════════
-       5. HERO CANVAS — live supply-chain network
+       5. HERO CANVAS — supply-chain nerve center
     ═══════════════════════════════════════════════ */
     function initHeroCanvas() {
         const canvas = document.getElementById('heroCanvas');
         if (!canvas || !canvas.getContext) return;
         const ctx = canvas.getContext('2d');
-        let W = 0, H = 0, raf = null;
-        let mouseNX = 0.5, mouseNY = 0.5;
+        let W = 0, H = 0, raf = null, dpr = window.devicePixelRatio || 1;
 
-        const parent = canvas.parentElement;
+        const heroSection = document.getElementById('heroSection') || canvas.parentElement;
         function resize() {
-            const r = parent.getBoundingClientRect();
-            W = canvas.width = r.width || 480;
-            H = canvas.height = r.height || 460;
+            const r = heroSection.getBoundingClientRect();
+            W = r.width || 1200; H = r.height || 700;
+            canvas.width = W * dpr; canvas.height = H * dpr;
+            canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
         }
         resize();
-        window.addEventListener('resize', resize, { passive: true });
-        parent.addEventListener('mousemove', e => {
-            const r = canvas.getBoundingClientRect();
-            mouseNX = (e.clientX - r.left) / r.width;
-            mouseNY = (e.clientY - r.top) / r.height;
-        });
+        window.addEventListener('resize', function(){ dpr = window.devicePixelRatio||1; resize(); }, { passive: true });
 
-        // ─── Node definitions (rx/ry = fractional 0–1 of canvas size) ───
-        const NODES = [
-            { id: 'factory',   label: 'Производство', rx: 0.10, ry: 0.28, r: 22, color: '#3b82f6', phase: 0.0 },
-            { id: 'import',    label: 'Импорт',        rx: 0.40, ry: 0.15, r: 15, color: '#8b5cf6', phase: 2.1 },
-            { id: 'hub',       label: 'RailTech',      rx: 0.50, ry: 0.50, r: 30, color: '#2563eb', phase: 1.0, hub: true },
-            { id: 'customs',   label: 'Таможня',       rx: 0.80, ry: 0.24, r: 15, color: '#f59e0b', phase: 3.2 },
-            { id: 'client',    label: 'Клиент',        rx: 0.88, ry: 0.66, r: 22, color: '#10b981', phase: 4.1 },
-            { id: 'docs',      label: 'КП / Docs',     rx: 0.18, ry: 0.76, r: 14, color: '#06b6d4', phase: 5.5 },
-            { id: 'logistics', label: 'Логистика',     rx: 0.66, ry: 0.82, r: 14, color: '#6366f1', phase: 6.3 },
-        ];
-        const EDGES = [
-            ['factory','hub'], ['factory','import'], ['import','hub'],
-            ['hub','customs'], ['hub','client'], ['hub','docs'],
-            ['hub','logistics'], ['customs','client'], ['logistics','client'],
-        ];
-        const packets = EDGES.map((edge, i) => ({
-            edge, t: i / EDGES.length, speed: 0.003 + (i % 3) * 0.0008
-        }));
+        var PI2 = Math.PI * 2;
 
-        // ─── Helpers ───
-        function hex2rgb(h) {
-            return [parseInt(h.slice(1,3),16), parseInt(h.slice(3,5),16), parseInt(h.slice(5,7),16)];
-        }
-        function rgba(h, a) {
-            const [r,g,b] = hex2rgb(h);
-            return `rgba(${r},${g},${b},${a})`;
-        }
-        function nodePos(def, t) {
-            const bob = Math.sin(t * 0.7 + def.phase) * H * 0.016;
-            const px  = (mouseNX - 0.5) * (def.hub ? 4 : 16);
-            const py  = (mouseNY - 0.5) * (def.hub ? 4 : 12);
-            return { x: def.rx * W + px, y: def.ry * H + bob + py };
-        }
-        function roundRect(ctx, x, y, w, h, r) {
-            ctx.beginPath();
-            ctx.moveTo(x+r, y);
-            ctx.lineTo(x+w-r, y); ctx.quadraticCurveTo(x+w, y, x+w, y+r);
-            ctx.lineTo(x+w, y+h-r); ctx.quadraticCurveTo(x+w, y+h, x+w-r, y+h);
-            ctx.lineTo(x+r, y+h); ctx.quadraticCurveTo(x, y+h, x, y+h-r);
-            ctx.lineTo(x, y+r); ctx.quadraticCurveTo(x, y, x+r, y);
-            ctx.closePath();
-        }
+        // ── Logo ──
+        var logoImg = new Image();
+        logoImg.src = (function() {
+            try {
+                var s = document.querySelectorAll('script[src*="main.js"]');
+                return s[s.length-1].getAttribute('src').replace(/js\/main\.js.*/, 'images/logo-outline.svg');
+            } catch(e) { return 'images/logo-outline.svg'; }
+        })();
+        var logoReady = false;
+        logoImg.onload = function(){ logoReady = true; };
 
-        // ─── Node icons (minimal line-art drawn on canvas) ───
-        function drawIcon(id, x, y, r, col) {
-            const s = r * 0.42;
-            ctx.save();
-            ctx.translate(x, y);
-            ctx.strokeStyle = col; ctx.fillStyle = col;
-            ctx.lineWidth = 1.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-            switch (id) {
-                case 'hub':
-                    ctx.font = `bold ${r*0.6}px Inter,Arial,sans-serif`;
-                    ctx.fillStyle = '#fff'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-                    ctx.fillText('RT', 0, 1); break;
-                case 'factory':
-                    ctx.beginPath();
-                    ctx.rect(-s, -s*0.5, s*2, s*1.3);
-                    ctx.stroke();
-                    ctx.fillRect(-s*0.25, s*0.1, s*0.5, s*0.7);
-                    // Chimney
-                    ctx.beginPath(); ctx.rect(-s*0.65, -s*1.1, s*0.35, s*0.65); ctx.stroke();
-                    break;
-                case 'import':
-                    ctx.beginPath();
-                    ctx.rect(-s*0.9, -s*0.9, s*1.8, s*1.8); ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(0, s*0.5); ctx.lineTo(0, -s*0.3);
-                    ctx.moveTo(-s*0.4, -s*0.0); ctx.lineTo(0, -s*0.45); ctx.lineTo(s*0.4, -s*0.0);
-                    ctx.stroke(); break;
-                case 'customs':
-                    ctx.beginPath(); ctx.arc(0, 0, s*0.9, 0, Math.PI*2); ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(-s*0.45, 0); ctx.lineTo(-s*0.1, s*0.38); ctx.lineTo(s*0.52, -s*0.38);
-                    ctx.stroke(); break;
-                case 'client':
-                    ctx.beginPath(); ctx.arc(0, -s*0.35, s*0.38, 0, Math.PI*2); ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(-s*0.7, s*0.65);
-                    ctx.bezierCurveTo(-s*0.7, s*0.1, s*0.7, s*0.1, s*0.7, s*0.65);
-                    ctx.stroke(); break;
-                case 'docs':
-                    ctx.beginPath();
-                    ctx.moveTo(-s*0.55, -s); ctx.lineTo(s*0.25, -s);
-                    ctx.lineTo(s*0.75, -s*0.35); ctx.lineTo(s*0.75, s);
-                    ctx.lineTo(-s*0.55, s); ctx.closePath(); ctx.stroke();
-                    ctx.beginPath();
-                    ctx.moveTo(-s*0.25, -s*0.15); ctx.lineTo(s*0.3, -s*0.15);
-                    ctx.moveTo(-s*0.25, s*0.15); ctx.lineTo(s*0.3, s*0.15);
-                    ctx.moveTo(-s*0.25, s*0.45); ctx.lineTo(s*0.1, s*0.45);
-                    ctx.stroke(); break;
-                case 'logistics':
-                    ctx.beginPath();
-                    ctx.rect(-s*0.85, -s*0.45, s*1.1, s*0.85); ctx.stroke();
-                    ctx.beginPath();
-                    ctx.rect(s*0.18, -s*0.35, s*0.67, s*0.75); ctx.stroke();
-                    ctx.beginPath();
-                    ctx.arc(-s*0.35, s*0.55, s*0.22, 0, Math.PI*2);
-                    ctx.arc(s*0.62, s*0.55, s*0.22, 0, Math.PI*2);
-                    ctx.stroke(); break;
-            }
-            ctx.restore();
-        }
-
-        // ─── Main draw loop ───
-        function draw(ts) {
-            const t = ts * 0.001;
-            ctx.clearRect(0, 0, W, H);
-
-            // Background hex grid
-            ctx.save();
-            ctx.strokeStyle = 'rgba(148,163,184,0.055)';
-            ctx.lineWidth = 1;
-            const R = 26;
-            const dx = R * Math.sqrt(3), dy = R * 1.5;
-            for (let row = -1; row * dy < H + dy * 2; row++) {
-                for (let col = -1; col * dx < W + dx * 2; col++) {
-                    const cx = col * dx + (row % 2 === 0 ? 0 : dx * 0.5);
-                    const cy = row * dy;
-                    ctx.beginPath();
-                    for (let i = 0; i < 6; i++) {
-                        const a = (Math.PI / 3) * i - Math.PI / 6;
-                        const px = cx + (R - 1) * Math.cos(a);
-                        const py = cy + (R - 1) * Math.sin(a);
-                        i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+        // ── Mouse tracking ──
+        var mouse = { x: W * 0.65, y: H * 0.5, active: false };
+        var hoveredNode = -1;
+        // Create tooltip in body to avoid overflow:hidden clipping
+        var tooltip = document.createElement('div');
+        tooltip.id = 'heroTooltip';
+        tooltip.style.cssText = 'position:fixed;pointer-events:none;opacity:0;transition:opacity 0.2s;background:rgba(15,23,42,0.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:12px;padding:8px 14px;border-radius:10px;box-shadow:0 8px 32px rgba(0,0,0,0.4);z-index:9999;max-width:220px;line-height:1.4';
+        document.body.appendChild(tooltip);
+        canvas.addEventListener('mousemove', function(e) {
+            var r = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top; mouse.active = true;
+        }, { passive: true });
+        canvas.addEventListener('mouseleave', function() { mouse.active = false; hoveredNode = -1; if(tooltip) tooltip.style.opacity='0'; canvas.style.cursor='default'; }, { passive: true });
+        canvas.addEventListener('click', function(e) {
+            var r = canvas.getBoundingClientRect();
+            var mx = e.clientX - r.left, my = e.clientY - r.top;
+            // check if click hits a node → spawn pulse wave
+            for (var ci = 0; ci < NODES.length; ci++) {
+                var cn = NODES[ci];
+                if (!cn._sx) continue;
+                var dx = mx - cn._sx, dy = my - cn._sy;
+                if (dx*dx + dy*dy < 900) {
+                    cn._pulse = 1.0; cn._pulseTime = 0;
+                    // boost comets on this node
+                    for (var cj = 0; cj < comets.length; cj++) {
+                        if (comets[cj].node === ci) comets[cj].speed *= 2.5;
                     }
-                    ctx.closePath(); ctx.stroke();
+                    break;
                 }
             }
+        });
+
+        // ── Nodes definition ──
+        // role: 'source' = flows TO hub, 'client' = flows FROM hub
+        var NODES = [
+            { label:'Производство', desc:'Заводы-партнёры по всему миру',        icon:'factory',   orbit:1, angle:0,     color:'#3b82f6', speed: 0.06, role:'source' },
+            { label:'Импорт',       desc:'Международные закупки и контракты',     icon:'import',    orbit:1, angle:0.90,  color:'#8b5cf6', speed: 0.06, role:'source' },
+            { label:'Таможня',      desc:'Полная таможенная очистка',             icon:'customs',   orbit:1, angle:1.80,  color:'#f59e0b', speed: 0.06, role:'source' },
+            { label:'Логистика',    desc:'Доставка до склада в Ташкенте',         icon:'logistics', orbit:1, angle:2.70,  color:'#6366f1', speed: 0.06, role:'source' },
+            { label:'КП / Docs',    desc:'Коммерческие предложения и документы',  icon:'docs',      orbit:1, angle:3.60,  color:'#06b6d4', speed: 0.06, role:'source' },
+            { label:'Сертификация', desc:'Сертификаты соответствия и качества',   icon:'cert',      orbit:2, angle:0.8,   color:'#ec4899', speed:-0.04, role:'source' },
+            { label:'Склад',        desc:'Хранение и учёт оборудования',          icon:'warehouse', orbit:2, angle:2.37,  color:'#14b8a6', speed:-0.04, role:'source' },
+            { label:'Аналитика',    desc:'Мониторинг цен и рынка',                icon:'analytics', orbit:2, angle:3.93,  color:'#f97316', speed:-0.04, role:'source' },
+            { label:'Поддержка',    desc:'Техническое сопровождение 24/7',        icon:'support',   orbit:2, angle:5.50,  color:'#a855f7', speed:-0.04, role:'source' },
+        ];
+        // Client node — special, fixed position right side
+        var CLIENT = { label:'Клиент', desc:'Готовое решение «под ключ»', icon:'client', color:'#10b981', _sx:0, _sy:0, _pulse:0, _pulseTime:0 };
+
+        // ── Comets (comet trails: node→hub for sources, hub→client) ──
+        var comets = [];
+        // source comets: each source node gets 2 comets
+        for (var ci = 0; ci < NODES.length; ci++) {
+            NODES[ci]._sx = 0; NODES[ci]._sy = 0; NODES[ci]._pulse = 0; NODES[ci]._pulseTime = 0;
+            for (var cp = 0; cp < 2; cp++) {
+                comets.push({ node: ci, t: cp * 0.5, speed: 0.003 + Math.random() * 0.002, dir: 'in', tailLen: 8 + Math.floor(Math.random()*6) });
+            }
+        }
+        // client comets: 3 golden comets from hub to client
+        for (var gc = 0; gc < 3; gc++) {
+            comets.push({ node: -1, t: gc * 0.33, speed: 0.004 + Math.random() * 0.002, dir: 'out', tailLen: 12 + Math.floor(Math.random()*5) });
+        }
+
+        // ── Background particles ──
+        var bgParts = [];
+        for (var bi = 0; bi < 60; bi++) {
+            bgParts.push({ x: Math.random(), y: Math.random(), r: 0.4 + Math.random() * 1.2, vx: (Math.random()-0.5)*0.0002, vy: (Math.random()-0.5)*0.0002, phase: Math.random()*PI2 });
+        }
+
+        function rgba(hex, a) {
+            return 'rgba('+parseInt(hex.slice(1,3),16)+','+parseInt(hex.slice(3,5),16)+','+parseInt(hex.slice(5,7),16)+','+a+')';
+        }
+        function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+        function lerp(a, b, t) { return a + (b - a) * t; }
+
+        // ── Draw node icon ──
+        function drawNodeIcon(id, x, y, r, col) {
+            var s = r * 0.38;
+            ctx.save(); ctx.translate(x, y);
+            ctx.strokeStyle = col; ctx.fillStyle = col;
+            ctx.lineWidth = 1.8; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+            switch(id) {
+                case 'factory':
+                    ctx.beginPath(); ctx.rect(-s,-s*0.4,s*2,s*1.2); ctx.stroke();
+                    ctx.fillRect(-s*0.2,s*0.15,s*0.4,s*0.65);
+                    ctx.beginPath(); ctx.rect(-s*0.6,-s*1,s*0.3,s*0.6); ctx.stroke(); break;
+                case 'import':
+                    ctx.beginPath(); ctx.rect(-s*0.8,-s*0.8,s*1.6,s*1.6); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(0,s*0.4); ctx.lineTo(0,-s*0.25);
+                    ctx.moveTo(-s*0.35,0.05); ctx.lineTo(0,-s*0.4); ctx.lineTo(s*0.35,0.05); ctx.stroke(); break;
+                case 'customs':
+                    ctx.beginPath(); ctx.arc(0,0,s*0.8,0,PI2); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(-s*0.4,0); ctx.lineTo(-s*0.08,s*0.35); ctx.lineTo(s*0.45,-s*0.35); ctx.stroke(); break;
+                case 'client':
+                    ctx.beginPath(); ctx.arc(0,-s*0.2,s*0.4,0,PI2); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(-s*0.6,s*0.65);
+                    ctx.bezierCurveTo(-s*0.6,s*0.1,s*0.6,s*0.1,s*0.6,s*0.65); ctx.stroke(); break;
+                case 'docs':
+                    ctx.beginPath(); ctx.moveTo(-s*0.5,-s*0.9); ctx.lineTo(s*0.2,-s*0.9);
+                    ctx.lineTo(s*0.7,-s*0.3); ctx.lineTo(s*0.7,s*0.9);
+                    ctx.lineTo(-s*0.5,s*0.9); ctx.closePath(); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(-s*0.2,-s*0.1); ctx.lineTo(s*0.3,-s*0.1);
+                    ctx.moveTo(-s*0.2,s*0.2); ctx.lineTo(s*0.3,s*0.2); ctx.stroke(); break;
+                case 'logistics':
+                    ctx.beginPath(); ctx.rect(-s*0.8,-s*0.4,s*1,s*0.8); ctx.stroke();
+                    ctx.beginPath(); ctx.rect(s*0.15,-s*0.3,s*0.6,s*0.7); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(-s*0.3,s*0.5,s*0.2,0,PI2); ctx.arc(s*0.55,s*0.5,s*0.2,0,PI2); ctx.stroke(); break;
+                case 'cert':
+                    ctx.beginPath(); ctx.arc(0,-s*0.15,s*0.55,0,PI2); ctx.stroke();
+                    ctx.beginPath(); ctx.moveTo(-s*0.2,s*0.35); ctx.lineTo(0,s*0.85); ctx.lineTo(s*0.2,s*0.35); ctx.stroke(); break;
+                case 'warehouse':
+                    ctx.beginPath(); ctx.moveTo(-s*0.7,s*0.1); ctx.lineTo(0,-s*0.7); ctx.lineTo(s*0.7,s*0.1); ctx.stroke();
+                    ctx.beginPath(); ctx.rect(-s*0.55,s*0.1,s*1.1,s*0.7); ctx.stroke();
+                    ctx.fillRect(-s*0.15,s*0.3,s*0.3,s*0.5); break;
+                case 'analytics':
+                    ctx.beginPath(); ctx.moveTo(-s*0.5,s*0.4); ctx.lineTo(-s*0.15,-s*0.1); ctx.lineTo(s*0.15,s*0.15); ctx.lineTo(s*0.5,-s*0.5); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(s*0.5,-s*0.5,s*0.15,0,PI2); ctx.fill(); break;
+                case 'support':
+                    ctx.beginPath(); ctx.arc(0,-s*0.1,s*0.55,0,PI2); ctx.stroke();
+                    ctx.font = 'bold '+(s*1.1)+'px Inter,sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+                    ctx.fillText('?',0,0); break;
+            }
             ctx.restore();
+        }
 
-            // Compute all positions
-            const nmap = {};
-            NODES.forEach(d => { nmap[d.id] = { ...d, ...nodePos(d, t) }; });
+        // ── Bezier curve helper for comet paths ──
+        function bezierPoint(p0x, p0y, p1x, p1y, p2x, p2y, t) {
+            var it = 1 - t;
+            return {
+                x: it*it*p0x + 2*it*t*p1x + t*t*p2x,
+                y: it*it*p0y + 2*it*t*p1y + t*t*p2y
+            };
+        }
 
-            // Edges — animated dashed lines
-            EDGES.forEach(([aid, bid]) => {
-                const a = nmap[aid], b = nmap[bid];
-                const g = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-                g.addColorStop(0, rgba(a.color, 0.38));
-                g.addColorStop(1, rgba(b.color, 0.38));
-                ctx.save();
-                ctx.setLineDash([5, 9]);
-                ctx.lineDashOffset = -(t * 24) % 14;
-                ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
-                ctx.strokeStyle = g; ctx.lineWidth = 1.3; ctx.stroke();
-                ctx.restore();
-            });
-
-            // Data packets — glowing dots traveling on edges
-            packets.forEach(p => {
-                const [aid, bid] = p.edge;
-                const a = nmap[aid], b = nmap[bid];
-                const px = a.x + (b.x - a.x) * p.t;
-                const py = a.y + (b.y - a.y) * p.t;
-                const g = ctx.createRadialGradient(px, py, 0, px, py, 11);
-                g.addColorStop(0, rgba(a.color, 0.9));
-                g.addColorStop(0.4, rgba(a.color, 0.4));
-                g.addColorStop(1, 'transparent');
-                ctx.beginPath(); ctx.arc(px, py, 11, 0, Math.PI*2);
-                ctx.fillStyle = g; ctx.fill();
-                ctx.beginPath(); ctx.arc(px, py, 3, 0, Math.PI*2);
-                ctx.fillStyle = '#fff'; ctx.fill();
-                p.t += p.speed;
-                if (p.t > 1.05) p.t = 0;
-            });
-
-            // Hub pulse rings
-            const hub = nmap['hub'];
-            for (let i = 0; i < 3; i++) {
-                const scale = 1.3 + i * 0.55 + Math.sin(t * 1.8 + i * 1.4) * 0.1;
+        // ── Draw comet with trail ──
+        function drawComet(headX, headY, trail, color, alpha, isGolden) {
+            if (trail.length < 2) return;
+            // Trail gradient line
+            for (var ti = 1; ti < trail.length; ti++) {
+                var ta = alpha * (1 - ti / trail.length) * 0.8;
+                var tw = isGolden ? (3.5 - ti * 0.2) : (2.5 - ti * 0.15);
+                if (tw < 0.3) tw = 0.3;
                 ctx.beginPath();
-                ctx.arc(hub.x, hub.y, hub.r * scale, 0, Math.PI*2);
-                ctx.strokeStyle = rgba(hub.color, 0.18 - i * 0.05);
-                ctx.lineWidth = 1.3; ctx.stroke();
+                ctx.moveTo(trail[ti-1].x, trail[ti-1].y);
+                ctx.lineTo(trail[ti].x, trail[ti].y);
+                ctx.strokeStyle = isGolden ? rgba('#fbbf24', ta) : rgba(color, ta);
+                ctx.lineWidth = tw;
+                ctx.stroke();
+            }
+            // Head glow
+            var gr = isGolden ? 8 : 5;
+            var hg = ctx.createRadialGradient(headX, headY, 0, headX, headY, gr);
+            hg.addColorStop(0, isGolden ? 'rgba(251,191,36,'+alpha*0.9+')' : rgba(color, alpha*0.8));
+            hg.addColorStop(0.4, isGolden ? 'rgba(251,191,36,'+alpha*0.3+')' : rgba(color, alpha*0.3));
+            hg.addColorStop(1, 'transparent');
+            ctx.beginPath(); ctx.arc(headX, headY, gr, 0, PI2);
+            ctx.fillStyle = hg; ctx.fill();
+            // Bright core
+            ctx.beginPath(); ctx.arc(headX, headY, isGolden ? 2.5 : 1.8, 0, PI2);
+            ctx.fillStyle = 'rgba(255,255,255,' + alpha * 0.95 + ')';
+            ctx.fill();
+        }
+
+        // ── Pulse wave ──
+        var pulseWaves = [];
+
+        // ─── Main render loop ───
+        var cometTrails = {};
+        function draw(ts) {
+            var t = ts * 0.001;
+            ctx.clearRect(0, 0, W, H);
+
+            // Hub center: right-of-center for full-width layout
+            var cx = W * 0.58, cy = H * 0.48;
+            var baseR = Math.min(W * 0.10, H * 0.13, 75);
+            var orbit1R = Math.min(baseR * 2.6, W * 0.22);
+            var orbit2R = Math.min(baseR * 3.5, W * 0.30);
+
+            // Client fixed position: right side, outside orbits
+            var clientX = Math.min(cx + orbit2R + 60, W - 100);
+            var clientY = cy + 5;
+            CLIENT._sx = clientX; CLIENT._sy = clientY;
+
+            // ── Mouse parallax offset ──
+            var mx = mouse.active ? (mouse.x - W*0.5) * 0.015 : 0;
+            var my = mouse.active ? (mouse.y - H*0.5) * 0.01 : 0;
+
+            // ── Background particles (with parallax) ──
+            for (var bpi = 0; bpi < bgParts.length; bpi++) {
+                var bp = bgParts[bpi];
+                bp.x += bp.vx; bp.y += bp.vy;
+                if (bp.x < -0.05 || bp.x > 1.05) bp.vx *= -1;
+                if (bp.y < -0.05 || bp.y > 1.05) bp.vy *= -1;
+                var ba = 0.06 + 0.06 * Math.sin(t * 0.7 + bp.phase);
+                var bpx = bp.x * W + mx * bp.r * 3;
+                var bpy = bp.y * H + my * bp.r * 3;
+                ctx.beginPath(); ctx.arc(bpx, bpy, bp.r, 0, PI2);
+                ctx.fillStyle = 'rgba(148,163,184,' + ba + ')';
+                ctx.fill();
             }
 
-            // Nodes
-            NODES.forEach(d => {
-                const n = nmap[d.id];
-                // Glow halo
-                const g = ctx.createRadialGradient(n.x, n.y, n.r * 0.4, n.x, n.y, n.r * 3);
-                g.addColorStop(0, rgba(d.color, d.hub ? 0.28 : 0.12));
-                g.addColorStop(1, 'transparent');
-                ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI*2);
-                ctx.fillStyle = g; ctx.fill();
-                // Circle
-                ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI*2);
-                ctx.fillStyle = d.hub ? rgba(d.color, 0.92) : rgba(d.color, 0.10);
-                ctx.strokeStyle = rgba(d.color, 0.85);
-                ctx.lineWidth = d.hub ? 2.5 : 1.8;
-                ctx.fill(); ctx.stroke();
+            // ── Ambient glow behind hub ──
+            var g0 = ctx.createRadialGradient(cx+mx, cy+my, baseR*0.5, cx+mx, cy+my, orbit2R*1.2);
+            g0.addColorStop(0, 'rgba(37,99,235,0.08)');
+            g0.addColorStop(0.5, 'rgba(99,102,241,0.03)');
+            g0.addColorStop(1, 'transparent');
+            ctx.beginPath(); ctx.arc(cx+mx, cy+my, orbit2R*1.2, 0, PI2);
+            ctx.fillStyle = g0; ctx.fill();
+
+            // ── Orbit rings ──
+            function drawOrbit(radius, alpha, dash) {
+                ctx.save(); ctx.translate(cx + mx*0.5, cy + my*0.5);
+                ctx.scale(1, 0.38);
+                ctx.beginPath(); ctx.arc(0, 0, radius, 0, PI2);
+                ctx.setLineDash(dash ? [dash, dash*1.8] : []);
+                ctx.lineDashOffset = -t * 12;
+                ctx.strokeStyle = 'rgba(96,165,250,' + alpha + ')';
+                ctx.lineWidth = 1; ctx.stroke(); ctx.setLineDash([]);
+                ctx.restore();
+            }
+            drawOrbit(orbit1R, 0.10, 5);
+            drawOrbit(orbit2R, 0.06, 7);
+
+            // ── Hub ──
+            var hx = cx + mx*0.5, hy = cy + my*0.5;
+            // Body
+            var gHub = ctx.createRadialGradient(hx - baseR*0.15, hy - baseR*0.15, baseR*0.05, hx, hy, baseR);
+            gHub.addColorStop(0, 'rgba(37,99,235,0.3)');
+            gHub.addColorStop(0.6, 'rgba(30,58,138,0.18)');
+            gHub.addColorStop(1, 'rgba(15,23,42,0.35)');
+            ctx.beginPath(); ctx.arc(hx, hy, baseR, 0, PI2);
+            ctx.fillStyle = gHub; ctx.fill();
+            // Rim
+            var hubPulse = 0.25 + 0.1 * Math.sin(t * 1.5);
+            ctx.beginPath(); ctx.arc(hx, hy, baseR, 0, PI2);
+            ctx.strokeStyle = 'rgba(96,165,250,' + hubPulse + ')';
+            ctx.lineWidth = 1.5; ctx.stroke();
+            // Pulse rings
+            for (var hr = 0; hr < 3; hr++) {
+                var hrr = baseR * (1.08 + hr * 0.12) + Math.sin(t * 2 + hr) * 2;
+                ctx.beginPath(); ctx.arc(hx, hy, hrr, 0, PI2);
+                ctx.strokeStyle = 'rgba(96,165,250,' + (0.07 - hr * 0.02) + ')';
+                ctx.lineWidth = 0.7; ctx.stroke();
+            }
+
+            // ── Logo in hub ──
+            if (logoReady) {
+                var lp = Math.min(1, t / 2.0);
+                var ep = ease(lp);
+                var logoS = baseR * 1.4;
+                var ly = hy + Math.sin(t * 0.4) * 2;
+                ctx.save();
+                ctx.shadowColor = 'rgba(53,129,155,' + (0.6 * ep) + ')';
+                ctx.shadowBlur = 25 * ep;
+                ctx.globalAlpha = 0.9 * ep;
+                ctx.drawImage(logoImg, hx - logoS/2, ly - logoS/2, logoS, logoS);
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 0.12 * ep;
+                ctx.globalCompositeOperation = 'lighter';
+                ctx.drawImage(logoImg, hx - logoS/2, ly - logoS/2, logoS, logoS);
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.restore();
+            }
+
+            // ── Compute node positions ──
+            var newHovered = -1;
+            for (var ni = 0; ni < NODES.length; ni++) {
+                var nd = NODES[ni];
+                var oR = nd.orbit === 1 ? orbit1R : orbit2R;
+                var a = nd.angle + t * nd.speed;
+                var px = mx * (nd.orbit === 1 ? 0.7 : 1.0);
+                var py = my * (nd.orbit === 1 ? 0.5 : 0.8);
+                nd._sx = cx + Math.cos(a) * oR + px;
+                nd._sy = cy + Math.sin(a) * oR * 0.38 + py;
+                nd._z = Math.sin(a);
+                nd._a = a;
+                // check hover
+                if (mouse.active) {
+                    var ddx = mouse.x - nd._sx, ddy = mouse.y - nd._sy;
+                    if (ddx*ddx + ddy*ddy < 900) newHovered = ni;
+                }
+            }
+
+            // ── Tooltip logic ──
+            if (newHovered !== hoveredNode) {
+                hoveredNode = newHovered;
+                if (hoveredNode >= 0 && tooltip) {
+                    var hn = NODES[hoveredNode];
+                    tooltip.innerHTML = '<b style="color:'+hn.color+'">'+hn.label+'</b><br><span style="opacity:0.7">'+hn.desc+'</span>';
+                    tooltip.style.opacity = '1';
+                    canvas.style.cursor = 'pointer';
+                } else if (tooltip) {
+                    tooltip.style.opacity = '0';
+                    canvas.style.cursor = 'default';
+                }
+            }
+            if (hoveredNode >= 0 && tooltip) {
+                var cr = canvas.getBoundingClientRect();
+                tooltip.style.left = (cr.left + NODES[hoveredNode]._sx + 20) + 'px';
+                tooltip.style.top = (cr.top + NODES[hoveredNode]._sy - 15) + 'px';
+            }
+            // check client hover
+            if (mouse.active) {
+                var cdx = mouse.x - clientX, cdy = mouse.y - clientY;
+                if (cdx*cdx + cdy*cdy < 1200 && hoveredNode < 0) {
+                    if (tooltip) {
+                        tooltip.innerHTML = '<b style="color:'+CLIENT.color+'">'+CLIENT.label+'</b><br><span style="opacity:0.7">'+CLIENT.desc+'</span>';
+                        tooltip.style.opacity = '1';
+                        var cr2 = canvas.getBoundingClientRect();
+                        tooltip.style.left = (cr2.left + clientX + 25) + 'px';
+                        tooltip.style.top = (cr2.top + clientY - 15) + 'px';
+                        canvas.style.cursor = 'pointer';
+                    }
+                }
+            }
+
+            // ── Draw dashed connection lines (source→hub) ──
+            for (var li = 0; li < NODES.length; li++) {
+                var ln = NODES[li];
+                var la = 0.04 + (ln._z + 1) * 0.04;
+                if (li === hoveredNode) la *= 3;
+                ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(ln._sx, ln._sy);
+                ctx.setLineDash([3, 7]); ctx.lineDashOffset = -t * 18;
+                ctx.strokeStyle = rgba(ln.color, la);
+                ctx.lineWidth = 0.7; ctx.stroke(); ctx.setLineDash([]);
+            }
+            // Hub → Client connection (golden, thicker)
+            var cla = 0.15 + 0.05 * Math.sin(t * 2);
+            ctx.beginPath(); ctx.moveTo(hx, hy); ctx.lineTo(clientX, clientY);
+            ctx.setLineDash([4, 6]); ctx.lineDashOffset = -t * 25;
+            ctx.strokeStyle = rgba('#fbbf24', cla);
+            ctx.lineWidth = 1.2; ctx.stroke(); ctx.setLineDash([]);
+
+            // ── Draw service nodes ──
+            for (var di = 0; di < NODES.length; di++) {
+                var dn = NODES[di];
+                var dz = dn._z;
+                var dAlpha = 0.35 + (dz + 1) * 0.325;
+                var dR = (dn.orbit === 1 ? 20 : 16) * (0.75 + (dz + 1) * 0.125);
+                var isHov = (di === hoveredNode);
+                if (isHov) { dR *= 1.3; dAlpha = 1; }
+
+                // Node glow
+                var ng = ctx.createRadialGradient(dn._sx, dn._sy, 0, dn._sx, dn._sy, dR * (isHov ? 3.5 : 2.5));
+                ng.addColorStop(0, rgba(dn.color, (isHov ? 0.25 : 0.1) * dAlpha));
+                ng.addColorStop(1, 'transparent');
+                ctx.beginPath(); ctx.arc(dn._sx, dn._sy, dR * (isHov ? 3.5 : 2.5), 0, PI2);
+                ctx.fillStyle = ng; ctx.fill();
+
+                // Body
+                ctx.beginPath(); ctx.arc(dn._sx, dn._sy, dR, 0, PI2);
+                var nf = ctx.createRadialGradient(dn._sx-dR*0.2, dn._sy-dR*0.2, dR*0.1, dn._sx, dn._sy, dR);
+                nf.addColorStop(0, rgba(dn.color, 0.22 * dAlpha));
+                nf.addColorStop(1, rgba(dn.color, 0.08 * dAlpha));
+                ctx.fillStyle = nf; ctx.fill();
+                ctx.strokeStyle = rgba(dn.color, (isHov ? 0.8 : 0.45) * dAlpha);
+                ctx.lineWidth = isHov ? 2 : 1.2; ctx.stroke();
+
                 // Icon
-                drawIcon(d.id, n.x, n.y, n.r, d.hub ? '#fff' : d.color);
+                ctx.globalAlpha = dAlpha;
+                drawNodeIcon(dn.icon, dn._sx, dn._sy, dR, rgba(dn.color, 0.9));
+                ctx.globalAlpha = 1;
+
                 // Label
-                ctx.font = `${d.hub ? '600 ' : ''}9.5px Inter,Arial,sans-serif`;
-                ctx.fillStyle = d.hub ? 'rgba(255,255,255,0.9)' : 'rgba(148,163,184,0.85)';
-                ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-                ctx.fillText(d.label, n.x, n.y + n.r + 14);
-            });
+                ctx.font = (isHov ? '700 11' : (dn.orbit===1 ? '600 9' : '500 9')) + 'px Inter,system-ui,sans-serif';
+                ctx.fillStyle = rgba(dn.color, (isHov ? 1 : 0.65) * dAlpha);
+                ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+                ctx.fillText(dn.label, dn._sx, dn._sy + dR + 6);
+
+                // ── Node pulse wave ──
+                if (dn._pulse > 0) {
+                    dn._pulseTime += 0.04;
+                    var pw = dR + dn._pulseTime * 80;
+                    var pa = dn._pulse * (1 - dn._pulseTime);
+                    if (pa > 0) {
+                        ctx.beginPath(); ctx.arc(dn._sx, dn._sy, pw, 0, PI2);
+                        ctx.strokeStyle = rgba(dn.color, pa * 0.5);
+                        ctx.lineWidth = 2; ctx.stroke();
+                    }
+                    if (dn._pulseTime > 1) { dn._pulse = 0; dn._pulseTime = 0; }
+                }
+            }
+
+            // ── Draw CLIENT node (special, larger, golden glow) ──
+            var clR = 28;
+            // Golden ambient glow
+            var clg1 = ctx.createRadialGradient(clientX, clientY, 0, clientX, clientY, clR * 4);
+            clg1.addColorStop(0, 'rgba(251,191,36,0.12)');
+            clg1.addColorStop(0.5, 'rgba(16,185,129,0.06)');
+            clg1.addColorStop(1, 'transparent');
+            ctx.beginPath(); ctx.arc(clientX, clientY, clR * 4, 0, PI2);
+            ctx.fillStyle = clg1; ctx.fill();
+            // Shield/badge shape
+            ctx.beginPath(); ctx.arc(clientX, clientY, clR, 0, PI2);
+            var clf = ctx.createRadialGradient(clientX-clR*0.2, clientY-clR*0.2, clR*0.1, clientX, clientY, clR);
+            clf.addColorStop(0, 'rgba(16,185,129,0.3)');
+            clf.addColorStop(1, 'rgba(16,185,129,0.1)');
+            ctx.fillStyle = clf; ctx.fill();
+            ctx.strokeStyle = 'rgba(251,191,36,' + (0.5 + 0.2 * Math.sin(t * 2)) + ')';
+            ctx.lineWidth = 2; ctx.stroke();
+            // Second ring
+            ctx.beginPath(); ctx.arc(clientX, clientY, clR + 5, 0, PI2);
+            ctx.strokeStyle = 'rgba(251,191,36,' + (0.15 + 0.1 * Math.sin(t * 1.5)) + ')';
+            ctx.lineWidth = 1; ctx.stroke();
+            // Icon
+            drawNodeIcon('client', clientX, clientY, clR, 'rgba(16,185,129,0.9)');
+            // Label
+            ctx.font = '700 12px Inter,system-ui,sans-serif';
+            ctx.fillStyle = 'rgba(251,191,36,0.85)';
+            ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+            ctx.fillText(CLIENT.label, clientX, clientY + clR + 8);
+            // Receiving glow pulse
+            if (CLIENT._pulse > 0) {
+                CLIENT._pulseTime += 0.04;
+                var cpw = clR + CLIENT._pulseTime * 100;
+                var cpa = CLIENT._pulse * (1 - CLIENT._pulseTime);
+                if (cpa > 0) {
+                    ctx.beginPath(); ctx.arc(clientX, clientY, cpw, 0, PI2);
+                    ctx.strokeStyle = 'rgba(251,191,36,' + cpa * 0.4 + ')';
+                    ctx.lineWidth = 2.5; ctx.stroke();
+                }
+                if (CLIENT._pulseTime > 1) { CLIENT._pulse = 0; CLIENT._pulseTime = 0; }
+            }
+
+            // ── Draw comets with trails ──
+            for (var ki = 0; ki < comets.length; ki++) {
+                var c = comets[ki];
+                // Restore speed if boosted
+                var baseSpd = c.dir === 'out' ? 0.005 : 0.004;
+                if (c.speed > baseSpd * 3) c.speed *= 0.97;
+
+                c.t += c.speed;
+                if (c.t > 1) {
+                    c.t = 0;
+                    // When golden comet arrives at client → trigger pulse
+                    if (c.dir === 'out' && Math.random() < 0.4) { CLIENT._pulse = 0.8; CLIENT._pulseTime = 0; }
+                }
+
+                var startX, startY, endX, endY, ctrlX, ctrlY, cColor;
+
+                if (c.dir === 'in') {
+                    // Source node → hub
+                    var sn = NODES[c.node];
+                    if (!sn._sx) continue;
+                    startX = sn._sx; startY = sn._sy;
+                    endX = hx; endY = hy;
+                    cColor = sn.color;
+                    // Control point: arc upward
+                    ctrlX = (startX + endX) * 0.5 + (startY - endY) * 0.3;
+                    ctrlY = (startY + endY) * 0.5 - Math.abs(startX - endX) * 0.2;
+                } else {
+                    // Hub → client (golden)
+                    startX = hx; startY = hy;
+                    endX = clientX; endY = clientY;
+                    cColor = '#fbbf24';
+                    ctrlX = (startX + endX) * 0.5;
+                    ctrlY = (startY + endY) * 0.5 - 40 - Math.sin(t + ki) * 15;
+                }
+
+                // Build trail from history
+                var key = 'c' + ki;
+                if (!cometTrails[key]) cometTrails[key] = [];
+                var head = bezierPoint(startX, startY, ctrlX, ctrlY, endX, endY, c.t);
+                cometTrails[key].unshift({ x: head.x, y: head.y });
+                if (cometTrails[key].length > c.tailLen) cometTrails[key].length = c.tailLen;
+
+                var cAlpha = Math.sin(c.t * Math.PI) * 0.85;
+                if (cAlpha < 0.05) { cometTrails[key].length = 0; continue; }
+                drawComet(head.x, head.y, cometTrails[key], cColor, cAlpha, c.dir === 'out');
+            }
 
             raf = requestAnimationFrame(draw);
         }

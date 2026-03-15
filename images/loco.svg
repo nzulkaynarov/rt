@@ -1,0 +1,809 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-strong" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ═══════════════════════════════════════
+       RAILS — рельсы и шпалы
+  ═══════════════════════════════════════ -->
+  <g id="loco-rails" stroke="#475569" stroke-width="1.5">
+    <!-- Rail head top -->
+    <line x1="20" y1="458" x2="1780" y2="458"/>
+    <!-- Rail foot -->
+    <line x1="20" y1="465" x2="1780" y2="465"/>
+    <!-- Rail web -->
+    <line x1="20" y1="461" x2="1780" y2="461" stroke-width="0.6" opacity="0.3"/>
+    <!-- Bottom rail -->
+    <line x1="20" y1="472" x2="1780" y2="472"/>
+    <line x1="20" y1="479" x2="1780" y2="479"/>
+    <line x1="20" y1="475" x2="1780" y2="475" stroke-width="0.6" opacity="0.3"/>
+    <!-- Sleepers -->
+    <line x1="60" y1="453" x2="60" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="110" y1="453" x2="110" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="160" y1="453" x2="160" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="210" y1="453" x2="210" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="260" y1="453" x2="260" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="310" y1="453" x2="310" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="360" y1="453" x2="360" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="410" y1="453" x2="410" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="460" y1="453" x2="460" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="510" y1="453" x2="510" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="560" y1="453" x2="560" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="610" y1="453" x2="610" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="660" y1="453" x2="660" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="710" y1="453" x2="710" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="760" y1="453" x2="760" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="810" y1="453" x2="810" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="860" y1="453" x2="860" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="910" y1="453" x2="910" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="960" y1="453" x2="960" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1010" y1="453" x2="1010" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1060" y1="453" x2="1060" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1110" y1="453" x2="1110" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1160" y1="453" x2="1160" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1210" y1="453" x2="1210" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1260" y1="453" x2="1260" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1310" y1="453" x2="1310" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1360" y1="453" x2="1360" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1410" y1="453" x2="1410" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1460" y1="453" x2="1460" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1510" y1="453" x2="1510" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1560" y1="453" x2="1560" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1610" y1="453" x2="1610" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1660" y1="453" x2="1660" y2="484" stroke-width="4" opacity="0.3"/>
+    <line x1="1710" y1="453" x2="1710" y2="484" stroke-width="4" opacity="0.3"/>
+    <!-- Ballast edge lines -->
+    <line x1="20" y1="488" x2="1780" y2="488" stroke-width="0.5" opacity="0.15"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       WHEELS — колёсные пары (4 тележки по 2 оси)
+  ═══════════════════════════════════════ -->
+  <g id="loco-wheels" stroke="#94a3b8" stroke-width="1.5">
+    <!-- *** BOGIE 1 (front-left) *** -->
+    <g id="bogie-1">
+      <!-- Bogie side frame -->
+      <path d="M165,400 L165,410 L340,410 L340,400" stroke-width="1.8"/>
+      <path d="M175,400 L175,415 L330,415 L330,400" stroke-width="1"/>
+      <!-- Equalizer beam -->
+      <line x1="185" y1="415" x2="320" y2="415" stroke-width="2"/>
+      <!-- Primary suspension springs (coils) -->
+      <path d="M200,415 L200,425 L204,427 L196,430 L204,433 L196,436 L200,438" stroke-width="0.8"/>
+      <path d="M305,415 L305,425 L309,427 L301,430 L309,433 L301,436 L305,438" stroke-width="0.8"/>
+      <!-- Secondary suspension (leaf springs) -->
+      <path d="M218,400 C230,395 270,395 287,400" stroke-width="1.2"/>
+      <path d="M222,398 C232,394 268,394 283,398" stroke-width="0.8" opacity="0.6"/>
+      <path d="M226,396 C234,393 266,393 279,396" stroke-width="0.6" opacity="0.4"/>
+      <!-- Dampers -->
+      <rect x="225" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="274" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <!-- Axle boxes -->
+      <rect x="192" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <rect x="297" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <!-- Wheels -->
+      <circle cx="200" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="200" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="200" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="200" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <!-- Spokes -->
+      <line x1="187" y1="445" x2="213" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="200" y1="432" x2="200" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <line x1="191" y1="436" x2="209" y2="454" stroke-width="0.4" opacity="0.2"/>
+      <line x1="209" y1="436" x2="191" y2="454" stroke-width="0.4" opacity="0.2"/>
+      <!-- Wheel tire flange -->
+      <circle cx="200" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+
+      <circle cx="305" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="305" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="305" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="305" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="292" y1="445" x2="318" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="305" y1="432" x2="305" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <line x1="296" y1="436" x2="314" y2="454" stroke-width="0.4" opacity="0.2"/>
+      <line x1="314" y1="436" x2="296" y2="454" stroke-width="0.4" opacity="0.2"/>
+      <circle cx="305" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <!-- Axle connecting wheels -->
+      <line x1="200" y1="445" x2="305" y2="445" stroke-width="0.4" opacity="0.15"/>
+    </g>
+
+    <!-- *** BOGIE 2 (front-right) *** -->
+    <g id="bogie-2">
+      <path d="M460,400 L460,410 L635,410 L635,400" stroke-width="1.8"/>
+      <path d="M470,400 L470,415 L625,415 L625,400" stroke-width="1"/>
+      <line x1="480" y1="415" x2="615" y2="415" stroke-width="2"/>
+      <path d="M495,415 L495,425 L499,427 L491,430 L499,433 L491,436 L495,438" stroke-width="0.8"/>
+      <path d="M600,415 L600,425 L604,427 L596,430 L604,433 L596,436 L600,438" stroke-width="0.8"/>
+      <path d="M513,400 C525,395 565,395 582,400" stroke-width="1.2"/>
+      <path d="M517,398 C527,394 563,394 578,398" stroke-width="0.8" opacity="0.6"/>
+      <path d="M521,396 C529,393 561,393 574,396" stroke-width="0.6" opacity="0.4"/>
+      <rect x="520" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="569" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="487" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <rect x="592" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <circle cx="495" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="495" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="495" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="495" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="482" y1="445" x2="508" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="495" y1="432" x2="495" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="495" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <circle cx="600" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="600" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="600" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="600" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="587" y1="445" x2="613" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="600" y1="432" x2="600" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="600" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <line x1="495" y1="445" x2="600" y2="445" stroke-width="0.4" opacity="0.15"/>
+    </g>
+
+    <!-- *** BOGIE 3 (rear-left) *** -->
+    <g id="bogie-3">
+      <path d="M1165,400 L1165,410 L1340,410 L1340,400" stroke-width="1.8"/>
+      <path d="M1175,400 L1175,415 L1330,415 L1330,400" stroke-width="1"/>
+      <line x1="1185" y1="415" x2="1320" y2="415" stroke-width="2"/>
+      <path d="M1200,415 L1200,425 L1204,427 L1196,430 L1204,433 L1196,436 L1200,438" stroke-width="0.8"/>
+      <path d="M1305,415 L1305,425 L1309,427 L1301,430 L1309,433 L1301,436 L1305,438" stroke-width="0.8"/>
+      <path d="M1218,400 C1230,395 1270,395 1287,400" stroke-width="1.2"/>
+      <path d="M1222,398 C1232,394 1268,394 1283,398" stroke-width="0.8" opacity="0.6"/>
+      <rect x="1225" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="1274" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="1192" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <rect x="1297" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <circle cx="1200" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="1200" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="1200" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="1200" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="1187" y1="445" x2="1213" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="1200" y1="432" x2="1200" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1200" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <circle cx="1305" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="1305" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="1305" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="1305" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="1292" y1="445" x2="1318" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="1305" y1="432" x2="1305" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1305" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <line x1="1200" y1="445" x2="1305" y2="445" stroke-width="0.4" opacity="0.15"/>
+    </g>
+
+    <!-- *** BOGIE 4 (rear-right) *** -->
+    <g id="bogie-4">
+      <path d="M1460,400 L1460,410 L1635,410 L1635,400" stroke-width="1.8"/>
+      <path d="M1470,400 L1470,415 L1625,415 L1625,400" stroke-width="1"/>
+      <line x1="1480" y1="415" x2="1615" y2="415" stroke-width="2"/>
+      <path d="M1495,415 L1495,425 L1499,427 L1491,430 L1499,433 L1491,436 L1495,438" stroke-width="0.8"/>
+      <path d="M1600,415 L1600,425 L1604,427 L1596,430 L1604,433 L1596,436 L1600,438" stroke-width="0.8"/>
+      <path d="M1513,400 C1525,395 1565,395 1582,400" stroke-width="1.2"/>
+      <path d="M1517,398 C1527,394 1563,394 1578,398" stroke-width="0.8" opacity="0.6"/>
+      <rect x="1520" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="1569" y="395" width="6" height="18" rx="1" stroke-width="0.8" opacity="0.5"/>
+      <rect x="1487" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <rect x="1592" y="432" width="16" height="14" rx="2" stroke-width="1"/>
+      <circle cx="1495" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="1495" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="1495" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="1495" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="1482" y1="445" x2="1508" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="1495" y1="432" x2="1495" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1495" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <circle cx="1600" cy="445" r="18" stroke-width="2.2"/>
+      <circle cx="1600" cy="445" r="13" stroke-width="0.8" opacity="0.4"/>
+      <circle cx="1600" cy="445" r="5" stroke-width="1.2"/>
+      <circle cx="1600" cy="445" r="2" fill="#94a3b8" stroke="none"/>
+      <line x1="1587" y1="445" x2="1613" y2="445" stroke-width="0.5" opacity="0.3"/>
+      <line x1="1600" y1="432" x2="1600" y2="458" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1600" cy="445" r="20" stroke-width="0.5" opacity="0.2"/>
+      <line x1="1495" y1="445" x2="1600" y2="445" stroke-width="0.4" opacity="0.15"/>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       BODY — корпус ЧС7 (две секции)
+  ═══════════════════════════════════════ -->
+  <g id="loco-body" stroke="#60a5fa" stroke-width="1.5">
+    <!-- ====== SECTION 1 (LEFT) ====== -->
+    <!-- Main body outline section 1 -->
+    <path d="M115,395 L115,360 L140,355 L140,195
+             C140,180 145,170 155,163 L190,148
+             L220,138 L280,128 L380,122
+             L430,120 L780,118
+             L780,120 L820,120 L820,118
+             L870,118 L870,395" stroke-width="2"/>
+    <!-- Underframe section 1 -->
+    <line x1="115" y1="395" x2="870" y2="395" stroke-width="2"/>
+
+    <!-- Cab 1 front slope -->
+    <path d="M155,163 L140,195" stroke-width="2"/>
+
+    <!-- Horizontal body panel lines section 1 -->
+    <line x1="145" y1="210" x2="870" y2="210" stroke-width="0.5" opacity="0.2"/>
+    <line x1="145" y1="240" x2="870" y2="240" stroke-width="0.5" opacity="0.2"/>
+    <line x1="140" y1="270" x2="870" y2="270" stroke-width="0.5" opacity="0.2"/>
+    <line x1="140" y1="300" x2="870" y2="300" stroke-width="0.5" opacity="0.2"/>
+    <line x1="140" y1="330" x2="870" y2="330" stroke-width="0.5" opacity="0.2"/>
+    <line x1="140" y1="360" x2="870" y2="360" stroke-width="0.5" opacity="0.2"/>
+
+    <!-- Strong horizontal trim lines -->
+    <line x1="150" y1="180" x2="870" y2="180" stroke-width="1" opacity="0.4"/>
+    <line x1="115" y1="350" x2="870" y2="350" stroke-width="1" opacity="0.4"/>
+
+    <!-- Vertical panel dividers section 1 -->
+    <line x1="280" y1="128" x2="280" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="380" y1="122" x2="380" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="500" y1="120" x2="500" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="620" y1="118" x2="620" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="730" y1="118" x2="730" y2="395" stroke-width="0.5" opacity="0.15"/>
+
+    <!-- Cab 1 windshield -->
+    <path d="M147,185 L147,230 L195,230 L200,165" stroke-width="1.5" opacity="0.8"/>
+    <line x1="147" y1="208" x2="197" y2="198" stroke-width="0.6" opacity="0.4"/>
+    <!-- Windshield divider -->
+    <line x1="172" y1="175" x2="172" y2="230" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Side windows section 1 -->
+    <rect x="310" y="190" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="420" y="190" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="530" y="188" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="650" y="188" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="750" y="188" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+
+    <!-- Equipment doors section 1 -->
+    <rect x="305" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="410" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="520" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="630" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="740" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+
+    <!-- Door handles -->
+    <circle cx="355" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="460" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="570" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="680" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="790" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+
+    <!-- Ventilation louvers (lower body) section 1 -->
+    <rect x="215" y="355" width="65" height="32" rx="2" stroke-width="0.8" opacity="0.4"/>
+    <line x1="222" y1="358" x2="222" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="230" y1="358" x2="230" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="238" y1="358" x2="238" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="246" y1="358" x2="246" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="254" y1="358" x2="254" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="262" y1="358" x2="262" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="270" y1="358" x2="270" y2="384" stroke-width="0.4" opacity="0.25"/>
+
+    <!-- Headlights cab 1 -->
+    <circle cx="138" cy="215" r="8" stroke-width="1.5"/>
+    <circle cx="138" cy="215" r="4" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="138" cy="260" r="6" stroke-width="1.2"/>
+    <circle cx="138" cy="260" r="3" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Marker lights -->
+    <circle cx="143" cy="310" r="4" stroke-width="1"/>
+
+    <!-- Coupler front -->
+    <path d="M110,370 L80,370 L75,365 L75,345 L80,340 L110,340" stroke-width="1.8"/>
+    <line x1="80" y1="350" x2="80" y2="362" stroke-width="0.8" opacity="0.4"/>
+    <line x1="90" y1="342" x2="90" y2="368" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Number plates section 1 -->
+    <rect x="220" y="155" width="80" height="18" rx="2" stroke-width="0.8" opacity="0.6"/>
+    <text x="260" y="168" text-anchor="middle" fill="#60a5fa" fill-opacity="0.5" stroke="none" font-family="monospace" font-size="10" font-weight="bold">ЧС7-321</text>
+
+    <rect x="220" y="370" width="60" height="16" rx="2" stroke-width="0.6" opacity="0.4"/>
+    <text x="250" y="382" text-anchor="middle" fill="#60a5fa" fill-opacity="0.4" stroke="none" font-family="monospace" font-size="8">12026423</text>
+
+    <!-- Roof ventilation equipment section 1 -->
+    <rect x="300" y="110" width="100" height="14" rx="3" stroke-width="0.8" opacity="0.4"/>
+    <line x1="310" y1="113" x2="310" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="320" y1="113" x2="320" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="330" y1="113" x2="330" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="340" y1="113" x2="340" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="350" y1="113" x2="350" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="360" y1="113" x2="360" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="370" y1="113" x2="370" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="380" y1="113" x2="380" y2="121" stroke-width="0.4" opacity="0.25"/>
+    <line x1="390" y1="113" x2="390" y2="121" stroke-width="0.4" opacity="0.25"/>
+
+    <rect x="620" y="108" width="100" height="14" rx="3" stroke-width="0.8" opacity="0.4"/>
+    <line x1="630" y1="111" x2="630" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="640" y1="111" x2="640" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="650" y1="111" x2="650" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="660" y1="111" x2="660" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="670" y1="111" x2="670" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="680" y1="111" x2="680" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="690" y1="111" x2="690" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="700" y1="111" x2="700" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="710" y1="111" x2="710" y2="119" stroke-width="0.4" opacity="0.25"/>
+
+    <!-- Warning signs section 1 -->
+    <path d="M380,365 L385,356 L390,365 Z" stroke-width="0.8" opacity="0.5"/>
+    <path d="M410,365 L415,356 L420,365 Z" stroke-width="0.8" opacity="0.5"/>
+
+    <!-- ========= INTER-SECTION COUPLING ========= -->
+    <line x1="870" y1="118" x2="870" y2="395" stroke-width="2.5"/>
+    <rect x="856" y="310" width="28" height="60" rx="3" stroke-width="1.2" opacity="0.5"/>
+    <!-- Bellows/gangway -->
+    <path d="M870,180 L870,310" stroke-width="3" opacity="0.3"/>
+    <line x1="862" y1="200" x2="878" y2="200" stroke-width="0.6" opacity="0.3"/>
+    <line x1="862" y1="220" x2="878" y2="220" stroke-width="0.6" opacity="0.3"/>
+    <line x1="862" y1="240" x2="878" y2="240" stroke-width="0.6" opacity="0.3"/>
+    <line x1="862" y1="260" x2="878" y2="260" stroke-width="0.6" opacity="0.3"/>
+    <line x1="862" y1="280" x2="878" y2="280" stroke-width="0.6" opacity="0.3"/>
+    <line x1="862" y1="300" x2="878" y2="300" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- ====== SECTION 2 (RIGHT) ====== -->
+    <path d="M930,395 L930,118
+             L1120,118 L1200,118 L1370,118
+             L1420,120 L1520,122 L1580,128
+             L1620,138 L1650,148
+             C1655,150 1660,163 1660,175 L1660,195
+             L1685,355 L1685,360 L1685,395" stroke-width="2"/>
+    <line x1="930" y1="395" x2="1685" y2="395" stroke-width="2"/>
+
+    <!-- Cab 2 rear slope -->
+    <path d="M1660,195 L1650,163" stroke-width="2"/>
+
+    <!-- Horizontal body panel lines section 2 -->
+    <line x1="930" y1="210" x2="1660" y2="210" stroke-width="0.5" opacity="0.2"/>
+    <line x1="930" y1="240" x2="1660" y2="240" stroke-width="0.5" opacity="0.2"/>
+    <line x1="930" y1="270" x2="1660" y2="270" stroke-width="0.5" opacity="0.2"/>
+    <line x1="930" y1="300" x2="1660" y2="300" stroke-width="0.5" opacity="0.2"/>
+    <line x1="930" y1="330" x2="1660" y2="330" stroke-width="0.5" opacity="0.2"/>
+    <line x1="930" y1="360" x2="1685" y2="360" stroke-width="0.5" opacity="0.2"/>
+
+    <line x1="930" y1="180" x2="1655" y2="180" stroke-width="1" opacity="0.4"/>
+    <line x1="930" y1="350" x2="1685" y2="350" stroke-width="1" opacity="0.4"/>
+
+    <!-- Vertical panel dividers section 2 -->
+    <line x1="1050" y1="118" x2="1050" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="1170" y1="118" x2="1170" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="1290" y1="118" x2="1290" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="1420" y1="120" x2="1420" y2="395" stroke-width="0.5" opacity="0.15"/>
+    <line x1="1520" y1="122" x2="1520" y2="395" stroke-width="0.5" opacity="0.15"/>
+
+    <!-- Cab 2 windshield -->
+    <path d="M1655,185 L1655,230 L1607,230 L1602,165" stroke-width="1.5" opacity="0.8"/>
+    <line x1="1655" y1="208" x2="1604" y2="198" stroke-width="0.6" opacity="0.4"/>
+    <line x1="1630" y1="175" x2="1630" y2="230" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Side windows section 2 -->
+    <rect x="960" y="188" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="1070" y="188" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="1190" y="188" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="1310" y="190" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <rect x="1430" y="190" width="40" height="30" rx="2" stroke-width="0.8" opacity="0.5"/>
+
+    <!-- Equipment doors section 2 -->
+    <rect x="960" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="1070" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="1190" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="1310" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+    <rect x="1430" y="250" width="55" height="95" rx="2" stroke-width="0.8" opacity="0.3"/>
+
+    <circle cx="1010" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="1120" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="1240" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="1360" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+    <circle cx="1480" cy="295" r="2" fill="#60a5fa" fill-opacity="0.2" stroke="none"/>
+
+    <!-- Louvers section 2 -->
+    <rect x="1530" y="355" width="65" height="32" rx="2" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1537" y1="358" x2="1537" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1545" y1="358" x2="1545" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1553" y1="358" x2="1553" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1561" y1="358" x2="1561" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1569" y1="358" x2="1569" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1577" y1="358" x2="1577" y2="384" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1585" y1="358" x2="1585" y2="384" stroke-width="0.4" opacity="0.25"/>
+
+    <!-- Headlights cab 2 -->
+    <circle cx="1662" cy="215" r="8" stroke-width="1.5"/>
+    <circle cx="1662" cy="215" r="4" stroke-width="0.8" opacity="0.5"/>
+    <circle cx="1662" cy="260" r="6" stroke-width="1.2"/>
+    <circle cx="1662" cy="260" r="3" stroke-width="0.6" opacity="0.4"/>
+    <circle cx="1658" cy="310" r="4" stroke-width="1"/>
+
+    <!-- Coupler rear -->
+    <path d="M1690,370 L1720,370 L1725,365 L1725,345 L1720,340 L1690,340" stroke-width="1.8"/>
+    <line x1="1720" y1="350" x2="1720" y2="362" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1710" y1="342" x2="1710" y2="368" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Number plates section 2 -->
+    <rect x="1510" y="155" width="80" height="18" rx="2" stroke-width="0.8" opacity="0.6"/>
+    <text x="1550" y="168" text-anchor="middle" fill="#60a5fa" fill-opacity="0.5" stroke="none" font-family="monospace" font-size="10" font-weight="bold">ЧС7-321</text>
+
+    <rect x="1530" y="370" width="60" height="16" rx="2" stroke-width="0.6" opacity="0.4"/>
+    <text x="1560" y="382" text-anchor="middle" fill="#60a5fa" fill-opacity="0.4" stroke="none" font-family="monospace" font-size="8">12026423</text>
+
+    <!-- Roof vents section 2 -->
+    <rect x="1000" y="108" width="100" height="14" rx="3" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1010" y1="111" x2="1010" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1020" y1="111" x2="1020" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1030" y1="111" x2="1030" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1040" y1="111" x2="1040" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1050" y1="111" x2="1050" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1060" y1="111" x2="1060" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1070" y1="111" x2="1070" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1080" y1="111" x2="1080" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1090" y1="111" x2="1090" y2="119" stroke-width="0.4" opacity="0.25"/>
+
+    <rect x="1300" y="108" width="100" height="14" rx="3" stroke-width="0.8" opacity="0.4"/>
+    <line x1="1310" y1="111" x2="1310" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1320" y1="111" x2="1320" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1330" y1="111" x2="1330" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1340" y1="111" x2="1340" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1350" y1="111" x2="1350" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1360" y1="111" x2="1360" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1370" y1="111" x2="1370" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1380" y1="111" x2="1380" y2="119" stroke-width="0.4" opacity="0.25"/>
+    <line x1="1390" y1="111" x2="1390" y2="119" stroke-width="0.4" opacity="0.25"/>
+
+    <!-- Warning signs section 2 -->
+    <path d="M1390,365 L1395,356 L1400,365 Z" stroke-width="0.8" opacity="0.5"/>
+    <path d="M1420,365 L1425,356 L1430,365 Z" stroke-width="0.8" opacity="0.5"/>
+
+    <!-- Roof equipment boxes -->
+    <rect x="470" y="102" width="50" height="18" rx="3" stroke-width="0.8" opacity="0.35"/>
+    <rect x="1200" y="102" width="50" height="18" rx="3" stroke-width="0.8" opacity="0.35"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       PANTOGRAPH — токоприёмники (2 шт)
+  ═══════════════════════════════════════ -->
+  <g id="loco-pantograph" stroke="#38bdf8" stroke-width="1.5">
+    <!-- *** Pantograph 1 (section 1, raised) *** -->
+    <g id="panto-1">
+      <!-- Base frame on roof -->
+      <rect x="460" y="98" width="130" height="8" rx="2" stroke-width="1.2"/>
+      <!-- Insulators -->
+      <circle cx="490" cy="95" r="4" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="560" cy="95" r="4" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Lower arms (scissors) -->
+      <line x1="480" y1="95" x2="510" y2="52" stroke-width="1.8"/>
+      <line x1="570" y1="95" x2="540" y2="52" stroke-width="1.8"/>
+
+      <!-- Cross-bracing -->
+      <line x1="480" y1="95" x2="540" y2="52" stroke-width="0.6" opacity="0.3"/>
+      <line x1="570" y1="95" x2="510" y2="52" stroke-width="0.6" opacity="0.3"/>
+
+      <!-- Upper arms -->
+      <line x1="510" y1="52" x2="500" y2="22" stroke-width="1.5"/>
+      <line x1="540" y1="52" x2="550" y2="22" stroke-width="1.5"/>
+
+      <!-- Pivot joints -->
+      <circle cx="510" cy="52" r="3.5" stroke-width="1.2"/>
+      <circle cx="540" cy="52" r="3.5" stroke-width="1.2"/>
+      <circle cx="525" cy="52" r="2" fill="#38bdf8" fill-opacity="0.3" stroke="none"/>
+
+      <!-- Collector head -->
+      <line x1="475" y1="20" x2="575" y2="20" stroke-width="3"/>
+      <!-- Carbon contact strips -->
+      <rect x="483" y="16" width="35" height="4" rx="1" stroke-width="0.8" fill="#38bdf8" fill-opacity="0.1"/>
+      <rect x="532" y="16" width="35" height="4" rx="1" stroke-width="0.8" fill="#38bdf8" fill-opacity="0.1"/>
+
+      <!-- Horns (collector ends) -->
+      <path d="M475,20 L470,15" stroke-width="1.2"/>
+      <path d="M575,20 L580,15" stroke-width="1.2"/>
+
+      <!-- Springs -->
+      <path d="M495,95 L495,88 L499,85 L491,82 L499,79 L491,76 L495,73 L495,62" stroke-width="0.7" opacity="0.5"/>
+      <path d="M555,95 L555,88 L559,85 L551,82 L559,79 L551,76 L555,73 L555,62" stroke-width="0.7" opacity="0.5"/>
+    </g>
+
+    <!-- *** Pantograph 2 (section 2, folded) *** -->
+    <g id="panto-2">
+      <rect x="1160" y="98" width="130" height="8" rx="2" stroke-width="1.2"/>
+      <circle cx="1190" cy="95" r="4" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="1260" cy="95" r="4" stroke-width="0.8" opacity="0.6"/>
+
+      <!-- Lower arms (folded - horizontal) -->
+      <line x1="1180" y1="95" x2="1215" y2="72" stroke-width="1.8"/>
+      <line x1="1270" y1="95" x2="1235" y2="72" stroke-width="1.8"/>
+
+      <line x1="1180" y1="95" x2="1235" y2="72" stroke-width="0.6" opacity="0.3"/>
+      <line x1="1270" y1="95" x2="1215" y2="72" stroke-width="0.6" opacity="0.3"/>
+
+      <!-- Upper arms (folded flat) -->
+      <line x1="1215" y1="72" x2="1200" y2="60" stroke-width="1.5"/>
+      <line x1="1235" y1="72" x2="1250" y2="60" stroke-width="1.5"/>
+
+      <circle cx="1215" cy="72" r="3.5" stroke-width="1.2"/>
+      <circle cx="1235" cy="72" r="3.5" stroke-width="1.2"/>
+
+      <!-- Collector (folded) -->
+      <line x1="1175" y1="58" x2="1275" y2="58" stroke-width="3"/>
+      <rect x="1188" y="54" width="35" height="4" rx="1" stroke-width="0.8" fill="#38bdf8" fill-opacity="0.1"/>
+      <rect x="1227" y="54" width="35" height="4" rx="1" stroke-width="0.8" fill="#38bdf8" fill-opacity="0.1"/>
+      <path d="M1175,58 L1170,53" stroke-width="1.2"/>
+      <path d="M1275,58 L1280,53" stroke-width="1.2"/>
+
+      <path d="M1195,95 L1195,88 L1199,85 L1191,82 L1199,79 L1191,76 L1195,73 L1195,72" stroke-width="0.7" opacity="0.5"/>
+      <path d="M1255,95 L1255,88 L1259,85 L1251,82 L1259,79 L1251,76 L1255,73 L1255,72" stroke-width="0.7" opacity="0.5"/>
+    </g>
+
+    <!-- Overhead contact wire -->
+    <line x1="20" y1="8" x2="1780" y2="8" stroke-width="1.5" stroke-dasharray="10 5" opacity="0.25"/>
+    <!-- Wire supports -->
+    <line x1="80" y1="0" x2="80" y2="8" stroke-width="0.8" opacity="0.15"/>
+    <line x1="525" y1="0" x2="525" y2="8" stroke-width="0.8" opacity="0.15"/>
+    <line x1="1225" y1="0" x2="1225" y2="8" stroke-width="0.8" opacity="0.15"/>
+    <line x1="1720" y1="0" x2="1720" y2="8" stroke-width="0.8" opacity="0.15"/>
+
+    <!-- HV bus from pantograph 1 to roof -->
+    <path d="M525,20 L525,8" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       TRANSFORMER — силовые трансформаторы (по 1 на секцию)
+  ═══════════════════════════════════════ -->
+  <g id="loco-transformer" stroke="#f97316" stroke-width="1.2">
+    <!-- *** Transformer section 1 *** -->
+    <g>
+      <!-- Main housing -->
+      <rect x="395" y="255" width="200" height="85" rx="4" stroke-width="1.5"/>
+      <!-- Internal structure -->
+      <rect x="410" y="265" width="35" height="65" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <rect x="455" y="265" width="35" height="65" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <rect x="500" y="265" width="35" height="65" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <!-- E-I lamination lines -->
+      <line x1="413" y1="275" x2="442" y2="275" stroke-width="0.4" opacity="0.3"/>
+      <line x1="413" y1="285" x2="442" y2="285" stroke-width="0.4" opacity="0.3"/>
+      <line x1="413" y1="295" x2="442" y2="295" stroke-width="0.4" opacity="0.3"/>
+      <line x1="413" y1="305" x2="442" y2="305" stroke-width="0.4" opacity="0.3"/>
+      <line x1="413" y1="315" x2="442" y2="315" stroke-width="0.4" opacity="0.3"/>
+      <line x1="458" y1="275" x2="487" y2="275" stroke-width="0.4" opacity="0.3"/>
+      <line x1="458" y1="285" x2="487" y2="285" stroke-width="0.4" opacity="0.3"/>
+      <line x1="458" y1="295" x2="487" y2="295" stroke-width="0.4" opacity="0.3"/>
+      <line x1="458" y1="305" x2="487" y2="305" stroke-width="0.4" opacity="0.3"/>
+      <line x1="458" y1="315" x2="487" y2="315" stroke-width="0.4" opacity="0.3"/>
+      <line x1="503" y1="275" x2="532" y2="275" stroke-width="0.4" opacity="0.3"/>
+      <line x1="503" y1="285" x2="532" y2="285" stroke-width="0.4" opacity="0.3"/>
+      <line x1="503" y1="295" x2="532" y2="295" stroke-width="0.4" opacity="0.3"/>
+      <line x1="503" y1="305" x2="532" y2="305" stroke-width="0.4" opacity="0.3"/>
+      <line x1="503" y1="315" x2="532" y2="315" stroke-width="0.4" opacity="0.3"/>
+      <!-- Windings (coils) -->
+      <ellipse cx="427" cy="297" rx="10" ry="22" stroke-width="0.7" opacity="0.5"/>
+      <ellipse cx="472" cy="297" rx="10" ry="22" stroke-width="0.7" opacity="0.5"/>
+      <ellipse cx="517" cy="297" rx="10" ry="22" stroke-width="0.7" opacity="0.5"/>
+      <!-- Oil cooling radiator -->
+      <path d="M548,270 L575,270 L575,325 L548,325" stroke-width="0.8" opacity="0.5"/>
+      <line x1="554" y1="273" x2="554" y2="322" stroke-width="0.4" opacity="0.3"/>
+      <line x1="560" y1="273" x2="560" y2="322" stroke-width="0.4" opacity="0.3"/>
+      <line x1="566" y1="273" x2="566" y2="322" stroke-width="0.4" opacity="0.3"/>
+      <!-- Cooling fan -->
+      <circle cx="582" cy="297" r="10" stroke-width="0.8" opacity="0.5"/>
+      <path d="M582,287 C588,293 588,301 582,307" stroke-width="0.6" opacity="0.4"/>
+      <path d="M582,287 C576,293 576,301 582,307" stroke-width="0.6" opacity="0.4"/>
+      <!-- HV bus -->
+      <path d="M495,255 L495,240 L520,240 L520,120" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.35"/>
+    </g>
+
+    <!-- *** Transformer section 2 *** -->
+    <g>
+      <rect x="1095" y="255" width="200" height="85" rx="4" stroke-width="1.5"/>
+      <rect x="1110" y="265" width="35" height="65" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <rect x="1155" y="265" width="35" height="65" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <rect x="1200" y="265" width="35" height="65" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <line x1="1113" y1="275" x2="1142" y2="275" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1113" y1="285" x2="1142" y2="285" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1113" y1="295" x2="1142" y2="295" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1113" y1="305" x2="1142" y2="305" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1113" y1="315" x2="1142" y2="315" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1158" y1="275" x2="1187" y2="275" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1158" y1="285" x2="1187" y2="285" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1158" y1="295" x2="1187" y2="295" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1158" y1="305" x2="1187" y2="305" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1158" y1="315" x2="1187" y2="315" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1203" y1="275" x2="1232" y2="275" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1203" y1="285" x2="1232" y2="285" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1203" y1="295" x2="1232" y2="295" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1203" y1="305" x2="1232" y2="305" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1203" y1="315" x2="1232" y2="315" stroke-width="0.4" opacity="0.3"/>
+      <ellipse cx="1127" cy="297" rx="10" ry="22" stroke-width="0.7" opacity="0.5"/>
+      <ellipse cx="1172" cy="297" rx="10" ry="22" stroke-width="0.7" opacity="0.5"/>
+      <ellipse cx="1217" cy="297" rx="10" ry="22" stroke-width="0.7" opacity="0.5"/>
+      <path d="M1248,270 L1275,270 L1275,325 L1248,325" stroke-width="0.8" opacity="0.5"/>
+      <line x1="1254" y1="273" x2="1254" y2="322" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1260" y1="273" x2="1260" y2="322" stroke-width="0.4" opacity="0.3"/>
+      <line x1="1266" y1="273" x2="1266" y2="322" stroke-width="0.4" opacity="0.3"/>
+      <circle cx="1282" cy="297" r="10" stroke-width="0.8" opacity="0.5"/>
+      <path d="M1282,287 C1288,293 1288,301 1282,307" stroke-width="0.6" opacity="0.4"/>
+      <path d="M1282,287 C1276,293 1276,301 1282,307" stroke-width="0.6" opacity="0.4"/>
+      <path d="M1195,255 L1195,240 L1225,240 L1225,120" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.35"/>
+    </g>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       MOTORS — тяговые двигатели (8 шт, по 2 на тележку)
+  ═══════════════════════════════════════ -->
+  <g id="loco-motors" stroke="#22c55e" stroke-width="1.2">
+    <!-- Motor 1 - bogie 1, axle 1 -->
+    <rect x="183" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="200" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="200" y1="370" x2="200" y2="382" stroke-width="0.5" opacity="0.5"/>
+    <line x1="194" y1="376" x2="206" y2="376" stroke-width="0.5" opacity="0.5"/>
+    <line x1="200" y1="387" x2="200" y2="432" stroke-width="1" opacity="0.5"/>
+    <!-- Gear mesh -->
+    <circle cx="200" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 2 - bogie 1, axle 2 -->
+    <rect x="288" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="305" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="305" y1="387" x2="305" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="305" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 3 - bogie 2, axle 1 -->
+    <rect x="478" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="495" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="495" y1="387" x2="495" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="495" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 4 - bogie 2, axle 2 -->
+    <rect x="583" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="600" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="600" y1="387" x2="600" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="600" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 5 - bogie 3, axle 1 -->
+    <rect x="1183" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="1200" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="1200" y1="387" x2="1200" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="1200" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 6 - bogie 3, axle 2 -->
+    <rect x="1288" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="1305" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="1305" y1="387" x2="1305" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="1305" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 7 - bogie 4, axle 1 -->
+    <rect x="1478" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="1495" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="1495" y1="387" x2="1495" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="1495" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Motor 8 - bogie 4, axle 2 -->
+    <rect x="1583" y="365" width="34" height="22" rx="4" stroke-width="1.3"/>
+    <circle cx="1600" cy="376" r="6" stroke-width="0.8"/>
+    <line x1="1600" y1="387" x2="1600" y2="432" stroke-width="1" opacity="0.5"/>
+    <circle cx="1600" cy="420" r="5" stroke-width="0.6" opacity="0.4"/>
+
+    <!-- Power cables from transformers -->
+    <path d="M395,335 L350,350 L250,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+    <path d="M395,335 L370,350 L340,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+    <path d="M595,335 L580,350 L540,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+    <path d="M595,335 L610,350 L640,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+
+    <path d="M1095,335 L1060,350 L1250,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+    <path d="M1095,335 L1060,350 L1340,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+    <path d="M1295,335 L1370,350 L1540,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+    <path d="M1295,335 L1370,350 L1640,370" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       BRAKES — тормозная система
+  ═══════════════════════════════════════ -->
+  <g id="loco-brakes" stroke="#eab308" stroke-width="1">
+    <!-- Brake shoes (all 8 axles) -->
+    <!-- Bogie 1 -->
+    <path d="M180,440 L180,450 L186,452 L186,438 Z" stroke-width="1.2"/>
+    <path d="M218,440 L218,450 L224,452 L224,438 Z" stroke-width="1.2"/>
+    <path d="M285,440 L285,450 L291,452 L291,438 Z" stroke-width="1.2"/>
+    <path d="M323,440 L323,450 L329,452 L329,438 Z" stroke-width="1.2"/>
+    <!-- Brake rigging bogie 1 -->
+    <line x1="186" y1="445" x2="285" y2="445" stroke-width="0.6" opacity="0.4"/>
+    <rect x="230" y="400" width="22" height="10" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <line x1="241" y1="410" x2="241" y2="440" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Bogie 2 -->
+    <path d="M475,440 L475,450 L481,452 L481,438 Z" stroke-width="1.2"/>
+    <path d="M513,440 L513,450 L519,452 L519,438 Z" stroke-width="1.2"/>
+    <path d="M580,440 L580,450 L586,452 L586,438 Z" stroke-width="1.2"/>
+    <path d="M618,440 L618,450 L624,452 L624,438 Z" stroke-width="1.2"/>
+    <line x1="481" y1="445" x2="580" y2="445" stroke-width="0.6" opacity="0.4"/>
+    <rect x="525" y="400" width="22" height="10" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <line x1="536" y1="410" x2="536" y2="440" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Bogie 3 -->
+    <path d="M1180,440 L1180,450 L1186,452 L1186,438 Z" stroke-width="1.2"/>
+    <path d="M1218,440 L1218,450 L1224,452 L1224,438 Z" stroke-width="1.2"/>
+    <path d="M1285,440 L1285,450 L1291,452 L1291,438 Z" stroke-width="1.2"/>
+    <path d="M1323,440 L1323,450 L1329,452 L1329,438 Z" stroke-width="1.2"/>
+    <line x1="1186" y1="445" x2="1285" y2="445" stroke-width="0.6" opacity="0.4"/>
+    <rect x="1230" y="400" width="22" height="10" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <line x1="1241" y1="410" x2="1241" y2="440" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Bogie 4 -->
+    <path d="M1475,440 L1475,450 L1481,452 L1481,438 Z" stroke-width="1.2"/>
+    <path d="M1513,440 L1513,450 L1519,452 L1519,438 Z" stroke-width="1.2"/>
+    <path d="M1580,440 L1580,450 L1586,452 L1586,438 Z" stroke-width="1.2"/>
+    <path d="M1618,440 L1618,450 L1624,452 L1624,438 Z" stroke-width="1.2"/>
+    <line x1="1481" y1="445" x2="1580" y2="445" stroke-width="0.6" opacity="0.4"/>
+    <rect x="1525" y="400" width="22" height="10" rx="2" stroke-width="0.8" opacity="0.5"/>
+    <line x1="1536" y1="410" x2="1536" y2="440" stroke-width="0.6" opacity="0.3"/>
+
+    <!-- Main brake pipe (along entire body) -->
+    <path d="M120,392 L870,392" stroke-width="0.7" stroke-dasharray="6 2" opacity="0.3"/>
+    <path d="M930,392 L1680,392" stroke-width="0.7" stroke-dasharray="6 2" opacity="0.3"/>
+  </g>
+
+  <!-- ═══════════════════════════════════════
+       CABIN — кабины управления (обе стороны)
+  ═══════════════════════════════════════ -->
+  <g id="loco-cabin" stroke="#e879f9" stroke-width="1.3">
+    <!-- *** Cabin 1 (front/left) *** -->
+    <g>
+      <!-- Windshield frame -->
+      <rect x="150" y="186" width="46" height="42" rx="2" stroke-width="1.5"/>
+      <!-- Windshield divider -->
+      <line x1="173" y1="186" x2="173" y2="228" stroke-width="0.8" opacity="0.5"/>
+      <!-- Windshield wipers -->
+      <path d="M160,226 L155,210" stroke-width="0.5" opacity="0.4"/>
+      <path d="M185,226 L190,210" stroke-width="0.5" opacity="0.4"/>
+
+      <!-- Control desk -->
+      <rect x="150" y="265" width="55" height="25" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <!-- Instruments row 1 -->
+      <circle cx="162" cy="275" r="4" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="175" cy="275" r="4" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="188" cy="275" r="4" stroke-width="0.6" opacity="0.5"/>
+      <!-- Instruments row 2 (small) -->
+      <circle cx="162" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="170" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="178" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="186" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="194" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+
+      <!-- Controller (driver's brake valve) -->
+      <rect x="142" y="290" width="12" height="20" rx="2" stroke-width="0.7" opacity="0.5"/>
+
+      <!-- Driver seat -->
+      <rect x="158" y="300" width="20" height="22" rx="3" stroke-width="0.8" opacity="0.5"/>
+      <rect x="155" y="295" width="26" height="8" rx="2" stroke-width="0.6" opacity="0.4"/>
+
+      <!-- Side mirror -->
+      <path d="M140,240 L132,240 L130,244 L132,248 L140,248" stroke-width="0.8" opacity="0.5"/>
+
+      <!-- Cab door interior -->
+      <rect x="200" y="230" width="30" height="80" rx="2" stroke-width="0.7" opacity="0.3"/>
+      <circle cx="226" cy="270" r="2" fill="#e879f9" fill-opacity="0.2" stroke="none"/>
+    </g>
+
+    <!-- *** Cabin 2 (rear/right) *** -->
+    <g>
+      <rect x="1605" y="186" width="46" height="42" rx="2" stroke-width="1.5"/>
+      <line x1="1628" y1="186" x2="1628" y2="228" stroke-width="0.8" opacity="0.5"/>
+      <path d="M1615,226 L1610,210" stroke-width="0.5" opacity="0.4"/>
+      <path d="M1640,226 L1645,210" stroke-width="0.5" opacity="0.4"/>
+
+      <rect x="1595" y="265" width="55" height="25" rx="2" stroke-width="0.8" opacity="0.6"/>
+      <circle cx="1612" cy="275" r="4" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="1625" cy="275" r="4" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="1638" cy="275" r="4" stroke-width="0.6" opacity="0.5"/>
+      <circle cx="1612" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1620" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1628" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1636" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+      <circle cx="1644" cy="285" r="2" stroke-width="0.5" opacity="0.3"/>
+
+      <rect x="1648" y="290" width="12" height="20" rx="2" stroke-width="0.7" opacity="0.5"/>
+
+      <rect x="1622" y="300" width="20" height="22" rx="3" stroke-width="0.8" opacity="0.5"/>
+      <rect x="1619" y="295" width="26" height="8" rx="2" stroke-width="0.6" opacity="0.4"/>
+
+      <path d="M1662,240 L1670,240 L1672,244 L1670,248 L1662,248" stroke-width="0.8" opacity="0.5"/>
+
+      <rect x="1570" y="230" width="30" height="80" rx="2" stroke-width="0.7" opacity="0.3"/>
+      <circle cx="1574" cy="270" r="2" fill="#e879f9" fill-opacity="0.2" stroke="none"/>
+    </g>
+  </g>
+</svg>

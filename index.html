@@ -69,9 +69,10 @@
     </script>
 
     <!-- Favicon & mobile meta -->
+    <link rel="icon" href="favicon.ico" sizes="16x16 32x32">
+    <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="images/logo-filled.svg" type="image/svg+xml">
-    <link rel="shortcut icon" href="images/logo-filled.svg">
-    <link rel="apple-touch-icon" href="images/logo-filled.svg">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <meta name="theme-color" content="#0f172a">
 
     <!-- Tailwind Play CDN -->
@@ -220,89 +221,71 @@
 <!-- ╔══════════════════════════════════════════════════╗
      ║  HERO                                             ║
      ╚══════════════════════════════════════════════════╝ -->
-<header class="relative bg-slate-900 overflow-hidden min-h-[88vh] flex items-center">
-    <!-- Background orbs -->
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 blur-[100px] rounded-full -mr-32 -mt-32 pointer-events-none animate-pulse-slow"></div>
-    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 blur-[80px] rounded-full -ml-20 pointer-events-none animate-pulse-slow" style="animation-delay:2s"></div>
+<header id="heroSection" class="relative bg-slate-900 overflow-hidden min-h-[88vh] flex items-center">
+    <!-- Full-screen canvas background -->
+    <canvas id="heroCanvas" class="absolute inset-0 w-full h-full hidden lg:block" style="z-index:1"></canvas>
+
+    <!-- Fallback background orbs (mobile only) -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 blur-[100px] rounded-full -mr-32 -mt-32 pointer-events-none animate-pulse-slow lg:hidden"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-500/10 blur-[80px] rounded-full -ml-20 pointer-events-none animate-pulse-slow lg:hidden" style="animation-delay:2s"></div>
 
     <!-- Grid pattern overlay -->
-    <div class="absolute inset-0 opacity-[0.04]" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px;"></div>
+    <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px); background-size: 40px 40px; z-index:2"></div>
 
-    <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-8 py-24 w-full">
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+    <!-- Tooltip rendered by JS into body -->
 
-            <!-- Text block -->
-            <div class="max-w-xl">
-                <!-- Badge + typewriter -->
-                <div class="mb-6 animate-fade-up" style="animation-delay:0.1s">
-                    <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-full">
-                        <span class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse"></span>
-                        ООО «RailTech» — Ташкент, Узбекистан
-                    </div>
-                    <div class="mt-3 flex items-center gap-2 text-blue-400/80 text-sm font-medium">
-                        <svg class="w-3.5 h-3.5 shrink-0 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        <span id="heroTypewriter" class="min-w-0"></span><span class="inline-block w-px h-4 bg-blue-400 ml-0.5 align-middle animate-pulse" aria-hidden="true"></span>
-                    </div>
+    <div class="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 w-full pointer-events-none" style="z-index:10">
+        <div class="max-w-xl pointer-events-auto">
+            <!-- Badge + typewriter -->
+            <div class="mb-6 animate-fade-up" style="animation-delay:0.1s">
+                <div class="inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-300 text-xs font-semibold px-3 py-1.5 rounded-full backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse"></span>
+                    ООО «RailTech» — Ташкент, Узбекистан
                 </div>
-
-                <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-white mb-6 leading-[1.1] tracking-tight animate-fade-up" style="animation-delay:0.2s" data-i18n-html="hero_title">
-                    Комплексные поставки <br><span class="text-blue-400">промышленного оборудования</span>
-                </h1>
-
-                <p class="text-lg text-slate-300 mb-10 leading-relaxed animate-fade-up" style="animation-delay:0.35s" data-i18n="hero_desc">
-                    Обеспечиваем бесперебойную работу вашего производства в Узбекистане. Официальная гарантия, полная таможенная очистка и доставка до склада.
-                </p>
-
-                <div class="flex flex-wrap gap-4 animate-fade-up" style="animation-delay:0.5s">
-                    <a href="#contacts" class="inline-flex items-center gap-2 bg-blue-600 text-white px-7 py-4 rounded-xl text-base font-bold hover:bg-blue-700 active:scale-95 transition shadow-lg shadow-blue-700/30" data-i18n="btn_contact">
-                        Связаться с нами
-                    </a>
-                    <a href="pages/coming-soon.html" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-7 py-4 rounded-xl text-base font-bold hover:bg-white/20 active:scale-95 transition backdrop-blur-sm" data-i18n="btn_catalog">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-                        Перейти в каталог
-                    </a>
-                </div>
-
-                <!-- Mobile stat chips — only shown when canvas is hidden -->
-                <div class="flex flex-wrap gap-2.5 mt-7 animate-fade-up lg:hidden" style="animation-delay:0.65s" aria-hidden="true">
-                    <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white font-semibold backdrop-blur-sm">
-                        <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shrink-0"></span>
-                        <span data-i18n="hero_chip_1">120+ активных партнёров</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white font-semibold backdrop-blur-sm">
-                        <span class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse shrink-0"></span>
-                        <span data-i18n="hero_chip_2">500+ SKU в каталоге</span>
-                    </div>
-                    <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white font-semibold backdrop-blur-sm">
-                        <span class="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse shrink-0"></span>
-                        <span data-i18n="hero_chip_3">5 лет на рынке</span>
-                    </div>
+                <div class="mt-3 flex items-center gap-2 text-blue-400/80 text-sm font-medium">
+                    <svg class="w-3.5 h-3.5 shrink-0 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <span id="heroTypewriter" class="min-w-0"></span><span class="inline-block w-px h-4 bg-blue-400 ml-0.5 align-middle animate-pulse" aria-hidden="true"></span>
                 </div>
             </div>
 
-            <!-- Hero canvas animation — live supply chain network -->
-            <div class="hidden lg:flex items-center justify-center relative animate-fade-up" style="animation-delay:0.3s; min-height:460px;" aria-hidden="true">
-                <canvas id="heroCanvas" class="absolute inset-0 w-full h-full rounded-2xl"></canvas>
-                <!-- Floating stat chips (shown above canvas) -->
-                <div class="absolute top-6 right-6 bg-slate-800/80 backdrop-blur border border-slate-700/60 rounded-xl px-3.5 py-2 text-xs text-white font-semibold flex items-center gap-2 shadow-lg">
-                    <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse shrink-0"></span>
+            <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-white mb-6 leading-[1.1] tracking-tight animate-fade-up" style="animation-delay:0.2s" data-i18n-html="hero_title">
+                Комплексные поставки <br><span class="text-blue-400">промышленного оборудования</span>
+            </h1>
+
+            <p class="text-lg text-slate-300 mb-10 leading-relaxed animate-fade-up" style="animation-delay:0.35s" data-i18n="hero_desc">
+                Обеспечиваем бесперебойную работу вашего производства в Узбекистане. Официальная гарантия, полная таможенная очистка и доставка до склада.
+            </p>
+
+            <div class="flex flex-wrap gap-4 animate-fade-up" style="animation-delay:0.5s">
+                <a href="#contacts" class="inline-flex items-center gap-2 bg-blue-600 text-white px-7 py-4 rounded-xl text-base font-bold hover:bg-blue-700 active:scale-95 transition shadow-lg shadow-blue-700/30" data-i18n="btn_contact">
+                    Связаться с нами
+                </a>
+                <a href="pages/coming-soon.html" class="inline-flex items-center gap-2 bg-white/10 text-white border border-white/20 px-7 py-4 rounded-xl text-base font-bold hover:bg-white/20 active:scale-95 transition backdrop-blur-sm" data-i18n="btn_catalog">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                    Перейти в каталог
+                </a>
+            </div>
+
+            <!-- Mobile stat chips — only shown when canvas is hidden -->
+            <div class="flex flex-wrap gap-2.5 mt-7 animate-fade-up lg:hidden" style="animation-delay:0.65s" aria-hidden="true">
+                <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white font-semibold backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse shrink-0"></span>
                     <span data-i18n="hero_chip_1">120+ активных партнёров</span>
                 </div>
-                <div class="absolute bottom-8 left-4 bg-slate-800/80 backdrop-blur border border-slate-700/60 rounded-xl px-3.5 py-2 text-xs text-white font-semibold flex items-center gap-2 shadow-lg">
-                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse shrink-0"></span>
+                <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white font-semibold backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse shrink-0"></span>
                     <span data-i18n="hero_chip_2">500+ SKU в каталоге</span>
                 </div>
-                <div class="absolute top-1/2 -translate-y-1/2 left-4 bg-slate-800/80 backdrop-blur border border-slate-700/60 rounded-xl px-3.5 py-2 text-xs text-white font-semibold flex items-center gap-2 shadow-lg">
-                    <span class="w-2 h-2 bg-amber-400 rounded-full animate-pulse shrink-0"></span>
+                <div class="flex items-center gap-2 bg-white/10 border border-white/15 rounded-xl px-3 py-1.5 text-xs text-white font-semibold backdrop-blur-sm">
+                    <span class="w-1.5 h-1.5 bg-amber-400 rounded-full animate-pulse shrink-0"></span>
                     <span data-i18n="hero_chip_3">5 лет на рынке</span>
                 </div>
             </div>
-
         </div>
     </div>
 
     <!-- Scroll hint -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 animate-bounce" aria-hidden="true">
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-slate-500 animate-bounce" style="z-index:10" aria-hidden="true">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
     </div>
 </header>
