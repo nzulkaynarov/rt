@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Технический аудит railtech.uz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f172a; color: #e2e8f0; line-height: 1.6; padding: 2rem; }
+  .container { max-width: 1100px; margin: 0 auto; }
+  h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #38bdf8; }
+  h2 { font-size: 1.4rem; margin: 2rem 0 1rem; color: #38bdf8; border-bottom: 1px solid #1e3a5f; padding-bottom: 0.5rem; }
+  h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; color: #94a3b8; }
+  .subtitle { color: #94a3b8; margin-bottom: 2rem; }
+  .summary-box { background: #1e293b; border-left: 4px solid #38bdf8; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin: 1.5rem 0; }
+  .summary-box p { margin: 0.3rem 0; }
+  table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; font-size: 0.92rem; }
+  th { background: #1e293b; color: #38bdf8; text-align: left; padding: 0.75rem 1rem; border-bottom: 2px solid #334155; }
+  td { padding: 0.65rem 1rem; border-bottom: 1px solid #1e293b; vertical-align: top; }
+  tr:hover td { background: #1e293b44; }
+  .status { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.82rem; font-weight: 600; white-space: nowrap; }
+  .excellent { background: #065f46; color: #6ee7b7; }
+  .fix { background: #78350f; color: #fcd34d; }
+  .critical { background: #7f1d1d; color: #fca5a5; }
+  .info { background: #1e3a5f; color: #93c5fd; }
+  .rec { color: #cbd5e1; font-size: 0.88rem; }
+  .priority-list { list-style: none; counter-reset: step; padding: 0; }
+  .priority-list li { counter-increment: step; padding: 0.75rem 1rem 0.75rem 3.5rem; margin: 0.5rem 0; background: #1e293b; border-radius: 8px; position: relative; }
+  .priority-list li::before { content: counter(step); position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); background: #38bdf8; color: #0f172a; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; }
+  .metric { display: inline-block; background: #1e293b; padding: 0.4rem 0.8rem; border-radius: 6px; margin: 0.25rem; font-size: 0.85rem; }
+  .metric strong { color: #38bdf8; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid #1e3a5f; color: #475569; font-size: 0.8rem; text-align: center; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Технический аудит: railtech.uz</h1>
+<p class="subtitle">Дата: 15 марта 2026 &nbsp;|&nbsp; Тип: статический сайт с кастомным доменом &nbsp;|&nbsp; Протокол: HTTPS / HTTP/2</p>
+
+<div class="summary-box">
+  <p><strong>Общая оценка:</strong> Сайт хорошо сделан технически — лёгкий, быстрый, с правильной SEO-базой. Основные точки роста: доступность (alt-тексты, <code>&lt;main&gt;</code>), структурированные данные и оптимизация скриптов.</p>
+  <p>
+    <span class="metric"><strong>TTFB:</strong> 455 мс</span>
+    <span class="metric"><strong>DOM Ready:</strong> 1 225 мс</span>
+    <span class="metric"><strong>Full Load:</strong> 1 695 мс</span>
+    <span class="metric"><strong>Transfer:</strong> ~15 КБ (HTML)</span>
+    <span class="metric"><strong>Ресурсы:</strong> 18 файлов (~36 КБ)</span>
+    <span class="metric"><strong>DOM-узлы:</strong> 579</span>
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>1. Технический аудит и производительность</h2>
+
+<table>
+  <thead><tr><th style="width:30%">Параметр</th><th style="width:15%">Статус</th><th>Рекомендация</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>TTFB (Time to First Byte)</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">455 мс — выше рекомендуемых 200 мс. Для кастомного домена с GitHub Pages это ожидаемо (DNS-resolve + CDN edge). Рассмотрите Cloudflare как CDN-прокси для снижения TTFB до ~100 мс.</td>
+    </tr>
+    <tr>
+      <td>DOM Loaded / Full Load</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">1.2 сек / 1.7 сек — отличные показатели для статического сайта. Страница загружается быстрее 2 секунд.</td>
+    </tr>
+    <tr>
+      <td>Размер страницы</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">~15 КБ HTML + 36 КБ ресурсов — крайне лёгкий сайт. SVG-графика вместо растра — отличное решение.</td>
+    </tr>
+    <tr>
+      <td>Протокол HTTP/2</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Используется h2 — мультиплексирование запросов, сжатие заголовков.</td>
+    </tr>
+    <tr>
+      <td>Минификация CSS</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">1 внешний CSS (Google Fonts) — минимальная нагрузка. Основные стили инлайнятся или в JS-бандле.</td>
+    </tr>
+    <tr>
+      <td>Минификация JS</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">4 JS-файла (i18n.js, main.js, cookie-consent.js + 1 unnamed). Ни один не имеет атрибутов <code>async</code> или <code>defer</code> — все блокируют рендеринг. Добавьте <code>defer</code> ко всем скриптам.</td>
+    </tr>
+    <tr>
+      <td>Lazy Loading изображений</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">10 из 22 изображений имеют <code>loading="lazy"</code>. Above-the-fold изображения загружаются сразу — правильно.</td>
+    </tr>
+    <tr>
+      <td>Preconnect для шрифтов</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Есть preconnect к fonts.googleapis.com и fonts.gstatic.com — DNS-resolve шрифтов начинается рано.</td>
+    </tr>
+    <tr>
+      <td>Preload критических ресурсов</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">Нет <code>&lt;link rel="preload"&gt;</code> для критических ресурсов. Добавьте preload для основного шрифта и hero-изображения/SVG.</td>
+    </tr>
+    <tr>
+      <td>Кэширование (GitHub Pages)</td>
+      <td><span class="status info">Информация</span></td>
+      <td class="rec">GitHub Pages устанавливает <code>Cache-Control: max-age=600</code> (10 мин). Для статики это мало. Cloudflare CDN позволит задать более агрессивное кэширование.</td>
+    </tr>
+    <tr>
+      <td>Формат изображений</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Все 22 изображения — SVG. Идеально для логотипов и иконок: бесконечная масштабируемость, минимальный вес.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>2. SEO-аудит</h2>
+
+<table>
+  <thead><tr><th style="width:30%">Параметр</th><th style="width:15%">Статус</th><th>Рекомендация</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Title</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">«RailTech — Поставка промышленного и железнодорожного оборудования в Узбекистане» — содержит ключевые слова, длина адекватная (~70 символов).</td>
+    </tr>
+    <tr>
+      <td>Meta Description</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Описание присутствует, содержит ключевые слова и призыв. Длина в допустимых пределах (~155 символов).</td>
+    </tr>
+    <tr>
+      <td>Meta Keywords</td>
+      <td><span class="status info">Информация</span></td>
+      <td class="rec">Присутствует (железнодорожное оборудование, Узбекистан, B2B). Google игнорирует этот тег, но для Yandex он ещё учитывается — оставьте.</td>
+    </tr>
+    <tr>
+      <td>Open Graph</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Полный набор: og:type, og:url, og:title, og:description, og:image. Ссылка будет красиво отображаться в мессенджерах и соцсетях.</td>
+    </tr>
+    <tr>
+      <td>Twitter Card</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec"><code>summary_large_image</code> — большая карточка при шаринге в Twitter/X.</td>
+    </tr>
+    <tr>
+      <td>Иерархия заголовков (H1–H6)</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">H1: 1 шт. (корректно — единственный). H2: 6, H3: 11, H4: 2. Иерархия логичная, без пропусков уровней.</td>
+    </tr>
+    <tr>
+      <td>Canonical URL</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec"><code>https://railtech.uz/</code> — указана, предотвращает дублирование контента.</td>
+    </tr>
+    <tr>
+      <td>Hreflang (мультиязычность)</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">4 тега: ru, en, uz, x-default. Корректная реализация для мультиязычного сайта.</td>
+    </tr>
+    <tr>
+      <td>robots.txt</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Присутствует. <code>User-agent: * Allow: /</code> + ссылка на sitemap.</td>
+    </tr>
+    <tr>
+      <td>sitemap.xml</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">Присутствует с hreflang-аннотациями. Однако <code>lastmod: 2025-01-15</code> — дата устарела. Обновляйте при каждом деплое. Также проверьте, что все URL в sitemap отвечают 200.</td>
+    </tr>
+    <tr>
+      <td>JSON-LD (Schema.org)</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">Есть блок Organization — хорошо. Но отсутствуют: WebSite (с SearchAction), LocalBusiness (адрес, телефон), BreadcrumbList. Добавьте для расширенных сниппетов в Google.</td>
+    </tr>
+    <tr>
+      <td>Meta Robots</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec"><code>index, follow</code> — страница открыта для индексации.</td>
+    </tr>
+    <tr>
+      <td>Атрибут lang</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec"><code>&lt;html lang="ru"&gt;</code> — корректно указан язык документа.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>3. Доступность и UX</h2>
+
+<table>
+  <thead><tr><th style="width:30%">Параметр</th><th style="width:15%">Статус</th><th>Рекомендация</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Mobile-friendly</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Viewport мета-тег присутствует. При 375px мобильная версия корректно адаптируется: бургер-меню, вертикальная раскладка, читабельный текст.</td>
+    </tr>
+    <tr>
+      <td>Alt-тексты изображений</td>
+      <td><span class="status critical">Критично</span></td>
+      <td class="rec"><strong>12 из 22 изображений без alt-текста</strong> (55%). Среди них — логотип компании. Каждому изображению нужен описательный alt. Для декоративных — <code>alt=""</code> + <code>role="presentation"</code>.</td>
+    </tr>
+    <tr>
+      <td>Формы без label</td>
+      <td><span class="status critical">Критично</span></td>
+      <td class="rec"><strong>6 полей ввода без label / aria-label.</strong> Скринридеры не смогут озвучить назначение этих полей. Добавьте <code>aria-label</code> или <code>&lt;label for="..."&gt;</code>.</td>
+    </tr>
+    <tr>
+      <td>Landmark &lt;main&gt;</td>
+      <td><span class="status critical">Критично</span></td>
+      <td class="rec">Отсутствует элемент <code>&lt;main&gt;</code>. Скринридеры используют его для навигации к основному контенту. Оберните основной контент в <code>&lt;main&gt;</code>.</td>
+    </tr>
+    <tr>
+      <td>Skip-to-content ссылка</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">Отсутствует skip-link. Добавьте скрытую ссылку «Перейти к содержимому» для клавиатурной навигации.</td>
+    </tr>
+    <tr>
+      <td>ARIA-атрибуты</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">17 элементов с ARIA-ролями. Tabindex не содержит нестандартных значений.</td>
+    </tr>
+    <tr>
+      <td>Семантическая вёрстка (HTML5)</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">Есть: header (1), nav (2), section (8), footer (1). Нет: <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;aside&gt;</code>. Добавьте <code>&lt;main&gt;</code> как минимум.</td>
+    </tr>
+    <tr>
+      <td>Контрастность текста</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Светлый текст (#e2e8f0) на тёмном фоне (#0f172a) — коэффициент контраста ~15:1, значительно выше требуемого WCAG AA (4.5:1).</td>
+    </tr>
+    <tr>
+      <td>Cookie-баннер</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Присутствует с двумя опциями: «Только необходимые» и «Принять все». Соответствует GDPR-практикам.</td>
+    </tr>
+    <tr>
+      <td>Количество DOM-узлов</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">579 узлов — значительно ниже порога в 1500. Лёгкий DOM, быстрый рендеринг.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>4. Специфика хостинга и инфраструктура</h2>
+
+<table>
+  <thead><tr><th style="width:30%">Параметр</th><th style="width:15%">Статус</th><th>Рекомендация</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>HTTPS</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Сайт полностью работает по HTTPS. Сертификат валиден.</td>
+    </tr>
+    <tr>
+      <td>Кастомный домен</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">railtech.uz — корректно настроен кастомный домен. Без видимых редиректов github.io → railtech.uz.</td>
+    </tr>
+    <tr>
+      <td>Favicon</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec">Присутствует favicon. Проверьте наличие apple-touch-icon и manifest.json для PWA.</td>
+    </tr>
+    <tr>
+      <td>Мультиязычность (i18n)</td>
+      <td><span class="status fix">Нужно исправить</span></td>
+      <td class="rec">Используется JS-файл i18n.js + query-параметр <code>?lang=</code>. Для SEO лучше использовать подпапки (<code>/en/</code>, <code>/uz/</code>) вместо query-параметров — поисковики индексируют их как отдельные страницы.</td>
+    </tr>
+    <tr>
+      <td>Публичный репозиторий</td>
+      <td><span class="status info">Информация</span></td>
+      <td class="rec">GitHub-репозиторий не найден в публичном доступе (вероятно приватный). Убедитесь, что в коде нет API-ключей или секретов.</td>
+    </tr>
+    <tr>
+      <td>Theme-color</td>
+      <td><span class="status excellent">Отлично</span></td>
+      <td class="rec"><code>#0f172a</code> — задан цвет для адресной строки на мобильных устройствах.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ═══════════════════════════════════════════ -->
+<h2>Резюме: ТОП-5 приоритетных шагов</h2>
+
+<ol class="priority-list">
+  <li>
+    <strong>Добавить alt-тексты к 12 изображениям без описания</strong><br>
+    <span class="rec">Критично для SEO и доступности. Логотип компании должен иметь alt="RailTech". Декоративные элементы — <code>alt=""</code>. Время: ~30 минут.</span>
+  </li>
+  <li>
+    <strong>Добавить <code>&lt;main&gt;</code>, skip-link и label для форм</strong><br>
+    <span class="rec">Обернуть контент в <code>&lt;main&gt;</code>, добавить <code>aria-label</code> к 6 полям ввода, создать skip-to-content ссылку. Время: ~1 час.</span>
+  </li>
+  <li>
+    <strong>Добавить <code>defer</code> ко всем &lt;script&gt; тегам</strong><br>
+    <span class="rec">Все 4 JS-файла блокируют рендеринг. Добавление <code>defer</code> ускорит First Contentful Paint. Также добавьте preload для критических ресурсов. Время: ~15 минут.</span>
+  </li>
+  <li>
+    <strong>Расширить Schema.org (JSON-LD)</strong><br>
+    <span class="rec">Добавить разметку WebSite (с SearchAction), LocalBusiness (адрес в Ташкенте, телефон, email), BreadcrumbList. Это повысит качество сниппетов в поиске. Время: ~1 час.</span>
+  </li>
+  <li>
+    <strong>Перевести мультиязычность на подпапки вместо query-параметров</strong><br>
+    <span class="rec">Заменить <code>?lang=en</code> / <code>?lang=uz</code> на <code>/en/</code> / <code>/uz/</code>. Поисковики лучше индексируют URL-пути. Обновить sitemap.xml и hreflang-теги. Время: ~3–4 часа.</span>
+  </li>
+</ol>
+
+<footer>
+  <p>Отчёт сгенерирован автоматически &nbsp;|&nbsp; railtech.uz &nbsp;|&nbsp; 15.03.2026</p>
+</footer>
+
+</div>
+</body>
+</html>

@@ -42,11 +42,14 @@
 
 <body class="bg-slate-900 text-white antialiased min-h-screen flex flex-col">
 
+<!-- Skip to content -->
+<a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">Перейти к содержимому</a>
+
 <!-- NAV -->
 <nav class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 py-4">
     <div class="max-w-7xl mx-auto px-5 lg:px-8 flex items-center justify-between gap-4">
         <a href="index.html" class="flex items-center gap-2.5 shrink-0" aria-label="RailTech — на главную">
-            <img src="images/logo-filled.svg" alt="" class="h-8 w-8" aria-hidden="true">
+            <img src="images/logo-filled.svg" alt="RailTech логотип" class="h-8 w-8">
             <span class="text-lg font-bold">Rail<span class="text-blue-400">Tech</span></span>
         </a>
         <div class="flex items-center gap-3">
@@ -61,7 +64,7 @@
 </nav>
 
 <!-- 404 CONTENT -->
-<main class="flex-1 flex items-center justify-center px-5 py-20">
+<main id="mainContent" class="flex-1 flex items-center justify-center px-5 py-20">
     <div class="text-center max-w-lg mx-auto">
 
         <!-- Animated 404 number -->
@@ -123,14 +126,14 @@
     </div>
 </footer>
 
-<script src="js/i18n.js"></script>
-<script>
+<script src="js/i18n.js" defer></script>
+<script defer>
     // Add 404-specific translation keys if i18n didn't load them
     document.addEventListener('langchange', () => {
         const t = window.i18n?.t || (k => k);
         // i18n handles data-i18n attrs automatically; no extra logic needed
     });
 </script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/cookie-consent.js" defer></script>
 </body>
 </html>

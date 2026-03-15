@@ -16,6 +16,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
+        .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; z-index: 200; }
+        .skip-link:focus { position: fixed; top: 0.5rem; left: 0.5rem; width: auto; height: auto; overflow: visible; background: #2563eb; color: #fff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 600; text-decoration: none; }
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
             --blue: #3b82f6;
@@ -444,6 +446,9 @@
 </head>
 <body>
 
+<!-- Skip to content -->
+<a href="#mainContent" class="skip-link">Перейти к содержимому</a>
+
 <!-- ── Background ── -->
 <canvas id="starCanvas" aria-hidden="true"></canvas>
 <div class="orb orb-blue"   aria-hidden="true"></div>
@@ -470,7 +475,7 @@
     </nav>
 
     <!-- ── HERO ── -->
-    <main class="hero" id="main">
+    <main id="mainContent" class="hero">
 
         <!-- Subdomain badge — updated by JS -->
         <div class="subdomain-badge">
@@ -859,7 +864,7 @@ document.getElementById('earlyForm').addEventListener('submit', async (e) => {
         // Build FormData explicitly — avoids stale hidden-field snapshots
         const data = new FormData();
         data.append('access_key', '3dd5078e-1b78-4abc-97b1-aa15882d7772');
-        data.append('to',         'zulkaynarov@gmail.com');
+        data.append('to',         'info@railtech.uz');
         data.append('subject',    subject);
         data.append('from_name',  'RailTech Coming Soon');
         data.append('email',      email);

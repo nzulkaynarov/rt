@@ -30,7 +30,7 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": ["Organization", "LocalBusiness"],
           "@id": "https://railtech.uz/#organization",
           "name": "RailTech",
           "legalName": "ООО «RailTech»",
@@ -39,22 +39,42 @@
             "@type": "ImageObject",
             "url": "https://railtech.uz/images/logo-filled.svg"
           },
+          "image": "https://railtech.uz/og-image.png",
           "description": "Официальный дилер ведущих производителей. Поставки ж/д комплектующих, промышленных товаров и услуги для предприятий Узбекистана.",
           "telephone": "+998901189000",
           "email": "info@railtech.uz",
           "address": {
             "@type": "PostalAddress",
-            "addressLocality": "Tashkent",
+            "streetAddress": "Офис B2-2097",
+            "addressLocality": "Ташкент",
+            "addressRegion": "Tashkent",
             "addressCountry": "UZ"
           },
-          "areaServed": ["UZ", "KZ", "RU"],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.2995,
+            "longitude": 69.2401
+          },
+          "areaServed": [
+            { "@type": "Country", "name": "Uzbekistan" },
+            { "@type": "Country", "name": "Kazakhstan" },
+            { "@type": "Country", "name": "Russia" }
+          ],
           "foundingDate": "2021",
+          "priceRange": "$$",
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:00",
+            "closes": "18:00"
+          },
           "contactPoint": {
             "@type": "ContactPoint",
             "telephone": "+998901189000",
             "contactType": "sales",
             "availableLanguage": ["Russian", "Uzbek", "English"]
-          }
+          },
+          "sameAs": []
         },
         {
           "@type": "WebSite",
@@ -62,7 +82,70 @@
           "url": "https://railtech.uz",
           "name": "RailTech",
           "publisher": { "@id": "https://railtech.uz/#organization" },
-          "inLanguage": ["ru", "en", "uz"]
+          "inLanguage": ["ru", "en", "uz"],
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://railtech.uz/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://railtech.uz/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Главная",
+              "item": "https://railtech.uz/"
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://railtech.uz/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Как оформить заявку на коммерческое предложение?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Зарегистрируйтесь в личном кабинете, пройдите верификацию, выберите позиции и запросите КП."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Работаете ли вы с нерезидентами Узбекистана?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, работаем с компаниями из Казахстана, России и других стран СНГ."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Какие сроки поставки?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Позиции «В наличии» — от 3 до 10 рабочих дней. Под заказ — уточняется при формировании КП."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Есть ли сертификаты на оборудование?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Да, все продукты сопровождаются сертификатами соответствия и паспортами качества."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Можно ли вернуть товар?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Возврат возможен в течение 14 дней при ненарушенной упаковке и соблюдении условий хранения."
+              }
+            }
+          ]
         }
       ]
     }
@@ -73,6 +156,7 @@
     <link rel="icon" href="images/favicon-32.png" type="image/png" sizes="32x32">
     <link rel="icon" href="images/logo-filled.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#0f172a">
 
     <!-- Tailwind Play CDN -->
@@ -105,6 +189,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Preload critical assets -->
+    <link rel="preload" href="images/logo-filled.svg" as="image" type="image/svg+xml">
 
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; }
@@ -142,6 +229,11 @@
 
 <body class="bg-white text-slate-900 selection:bg-blue-100 selection:text-blue-900 antialiased">
 
+<!-- Skip to content link for keyboard navigation -->
+<a href="#mainContent" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[200] focus:bg-blue-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg focus:text-sm focus:font-semibold">
+    Перейти к содержимому
+</a>
+
 <!-- ╔══════════════════════════════════════════════════╗
      ║  NAV                                              ║
      ╚══════════════════════════════════════════════════╝ -->
@@ -150,7 +242,7 @@
 
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2.5 shrink-0" aria-label="RailTech">
-            <img src="images/logo-filled.svg" alt="" class="h-9 w-9" aria-hidden="true">
+            <img src="images/logo-filled.svg" alt="RailTech логотип" class="h-9 w-9">
             <span class="text-lg font-bold text-slate-900">Rail<span class="text-blue-600">Tech</span></span>
         </a>
 
@@ -209,7 +301,7 @@
     </nav>
 
     <div class="flex items-center gap-3 mt-6">
-        <select class="lang-select js-lang-switcher flex-1 bg-white/10 text-white text-sm py-3 pl-3 pr-8 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500/30 cursor-pointer">
+        <select class="lang-select js-lang-switcher flex-1 bg-white/10 text-white text-sm py-3 pl-3 pr-8 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-blue-500/30 cursor-pointer" aria-label="Язык / Language">
             <option value="ru" class="bg-slate-900">🇷🇺 Русский</option>
             <option value="en" class="bg-slate-900">🇬🇧 English</option>
             <option value="uz" class="bg-slate-900">🇺🇿 O'zbek</option>
@@ -217,6 +309,8 @@
         <a href="pages/coming-soon.html" class="flex-1 text-center bg-blue-600 text-white font-semibold px-4 py-3 rounded-xl hover:bg-blue-700 transition" data-i18n="nav_cabinet">Войти</a>
     </div>
 </div>
+
+<main id="mainContent">
 
 <!-- ╔══════════════════════════════════════════════════╗
      ║  HERO                                             ║
@@ -732,7 +826,7 @@
             <!-- ─── Web3Forms: Register free at web3forms.com → get your access_key ─── -->
             <form id="contactForm" novalidate class="space-y-5">
                 <input type="hidden" name="access_key" id="w3f_key" value="3dd5078e-1b78-4abc-97b1-aa15882d7772">
-                <input type="hidden" name="to"         value="zulkaynarov@gmail.com">
+                <input type="hidden" name="to"         value="info@railtech.uz">
                 <input type="hidden" name="subject"    value="Новая заявка с сайта RailTech">
                 <input type="hidden" name="from_name"  value="RailTech Website">
                 <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -816,6 +910,8 @@
     </div>
 </section>
 
+</main>
+
 <!-- ╔══════════════════════════════════════════════════╗
      ║  FOOTER                                           ║
      ╚══════════════════════════════════════════════════╝ -->
@@ -826,7 +922,7 @@
             <!-- Brand -->
             <div class="lg:col-span-2">
                 <div class="flex items-center gap-2.5 mb-4">
-                    <img src="images/logo-filled.svg" alt="" class="h-9 w-9" aria-hidden="true">
+                    <img src="images/logo-filled.svg" alt="RailTech логотип" class="h-9 w-9">
                     <span class="text-xl font-bold text-white">Rail<span class="text-blue-400">Tech</span></span>
                 </div>
                 <p class="mb-6 max-w-xs leading-relaxed text-slate-400" data-i18n="footer_desc">
@@ -888,9 +984,9 @@
 </footer>
 
 <!-- ─── Scripts (deferred, i18n first) ─── -->
-<script src="js/i18n.js"></script>
-<script src="js/main.js"></script>
-<script src="js/cookie-consent.js"></script>
+<script src="js/i18n.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/cookie-consent.js" defer></script>
 
 </body>
 </html>

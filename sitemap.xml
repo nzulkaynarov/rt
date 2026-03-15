@@ -5,7 +5,7 @@
   <!-- ── Landing page (default: Russian) ── -->
   <url>
     <loc>https://railtech.uz/</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/"/>
@@ -17,7 +17,7 @@
   <!-- ── Landing page explicit lang variants ── -->
   <url>
     <loc>https://railtech.uz/?lang=en</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/"/>
@@ -28,7 +28,7 @@
 
   <url>
     <loc>https://railtech.uz/?lang=uz</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/"/>
@@ -40,7 +40,7 @@
   <!-- ── Privacy Policy ── -->
   <url>
     <loc>https://railtech.uz/pages/privacy.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/pages/privacy.html"/>
@@ -52,7 +52,7 @@
   <!-- ── Terms of Use ── -->
   <url>
     <loc>https://railtech.uz/pages/terms.html</loc>
-    <lastmod>2025-01-15</lastmod>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="ru"       href="https://railtech.uz/pages/terms.html"/>

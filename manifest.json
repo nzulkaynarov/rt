@@ -1,0 +1,28 @@
+{
+  "name": "RailTech — Поставка промышленного оборудования",
+  "short_name": "RailTech",
+  "description": "Официальный дилер ведущих производителей. Поставки ж/д комплектующих и промышленных товаров в Узбекистане.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "ru",
+  "icons": [
+    {
+      "src": "/images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo-filled.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
