@@ -224,6 +224,80 @@
         ::-webkit-scrollbar { width: 5px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+        /* ── Platform Showcase: Browser Frame + 3D ── */
+        .browser-frame {
+            background: #1e293b;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+            box-shadow: 0 0 80px rgba(59,130,246,0.15), 0 25px 50px rgba(0,0,0,0.4);
+        }
+        .browser-frame-bar {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 10px 14px;
+            background: rgba(15,23,42,0.6);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        .browser-frame-bar .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .browser-frame-bar .dot-r { background: #ef4444; }
+        .browser-frame-bar .dot-y { background: #eab308; }
+        .browser-frame-bar .dot-g { background: #22c55e; }
+        .browser-frame-bar .url-bar {
+            margin-left: 10px;
+            flex: 1;
+            max-width: 260px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: #64748b;
+            font-family: 'Inter', monospace;
+        }
+        .browser-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+        .platform-perspective {
+            perspective: 1000px;
+        }
+        .platform-3d {
+            transform: rotateY(-6deg) rotateX(3deg);
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: -20px 20px 60px rgba(0,0,0,0.4), -5px 5px 20px rgba(0,0,0,0.2);
+        }
+        .platform-3d:hover {
+            transform: rotateY(0deg) rotateX(0deg);
+            box-shadow: 0 20px 60px rgba(59,130,246,0.15), 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .floating-badge {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(15,23,42,0.85);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #e2e8f0;
+            white-space: nowrap;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: floatBadge 3s ease-in-out infinite;
+            z-index: 20;
+        }
+        .floating-badge .badge-dot {
+            width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+        }
+        @keyframes floatBadge {
+            0%,100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
     </style>
 </head>
 
@@ -522,132 +596,182 @@
             <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base" data-i18n="platform_desc">Мы перевели каждый этап работы с клиентом в цифровой формат. От выбора позиции в каталоге до подписанного договора.</p>
         </div>
 
-        <!-- Tab navigation bar -->
+        <!-- Tab navigation bar (6 tabs — customer journey order) -->
         <div class="flex flex-wrap justify-center gap-1 mb-8" role="tablist" aria-label="Функции платформы">
             <button class="platform-tab text-white border-b-2 border-blue-500 bg-blue-500/10 text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg transition-all duration-200" role="tab" aria-selected="true" data-i18n="platform_f1_tag">Каталог</button>
+            <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f3_tag">Калькулятор КП</button>
             <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f2_tag">Сделки</button>
-            <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f3_tag">Коммерческие предложения</button>
-            <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f4_tag">Верификация</button>
+            <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f5_tag">Smart Import</button>
+            <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f4_tag">Личный кабинет</button>
+            <button class="platform-tab text-slate-500 border-b-2 border-transparent text-xs sm:text-sm font-semibold px-4 py-2.5 rounded-t-lg hover:text-slate-300 transition-all duration-200" role="tab" aria-selected="false" data-i18n="platform_f6_tag">Админ-панель</button>
         </div>
 
         <!-- Slides container -->
-        <div class="relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl" style="min-height: clamp(280px, 50vw, 460px);">
+        <div class="relative overflow-hidden rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl" style="min-height: clamp(320px, 52vw, 520px);">
 
-            <!-- Progress bar (autoplay indicator) -->
+            <!-- Progress bar -->
             <div id="platformProgress" class="absolute top-0 left-0 h-0.5 bg-blue-500 z-30 transition-none" style="width:0%"></div>
 
             <!-- Side dots -->
-            <div class="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-20" aria-hidden="true">
+            <div class="absolute right-4 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-20" aria-hidden="true">
                 <button class="platform-dot w-2 h-2 rounded-full bg-blue-500 scale-125 transition-all duration-300 hover:scale-150" aria-label="1"></button>
                 <button class="platform-dot w-2 h-2 rounded-full bg-white/30 scale-100 transition-all duration-300 hover:scale-125" aria-label="2"></button>
                 <button class="platform-dot w-2 h-2 rounded-full bg-white/30 scale-100 transition-all duration-300 hover:scale-125" aria-label="3"></button>
                 <button class="platform-dot w-2 h-2 rounded-full bg-white/30 scale-100 transition-all duration-300 hover:scale-125" aria-label="4"></button>
+                <button class="platform-dot w-2 h-2 rounded-full bg-white/30 scale-100 transition-all duration-300 hover:scale-125" aria-label="5"></button>
+                <button class="platform-dot w-2 h-2 rounded-full bg-white/30 scale-100 transition-all duration-300 hover:scale-125" aria-label="6"></button>
             </div>
 
-            <!-- ─── Slide 1: Catalog ─── -->
+            <!-- ─── Slide 1: Каталог ─── -->
             <div class="platform-slide absolute inset-0 flex items-center px-6 py-8 lg:px-10 opacity-100 translate-x-0" role="tabpanel">
-                <div class="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="w-full grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-10 items-center">
                     <div>
                         <span class="inline-block bg-blue-500/20 text-blue-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-blue-500/30" data-i18n="platform_f1_tag">Каталог</span>
                         <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f1_title">500+ позиций оборудования</h3>
                         <p class="text-slate-400 leading-relaxed mb-6 text-sm sm:text-base" data-i18n="platform_f1_desc">Ж/Д комплектующие, промышленные товары, услуги — всё в одном каталоге с фильтрами по домену, категории и наличию.</p>
                         <a href="pages/coming-soon.html" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition shadow-lg shadow-blue-900/40" data-i18n="platform_cta">Открыть B2B каталог</a>
                     </div>
-                    <!-- Mockup: product grid -->
-                    <div class="hidden lg:block rounded-xl bg-slate-950 border border-slate-800 p-4">
-                        <div class="flex items-center gap-2 mb-4">
-                            <div class="flex-1 h-7 bg-slate-800 rounded-lg flex items-center px-3 gap-2">
-                                <div class="w-3 h-3 bg-slate-700 rounded-full"></div>
-                                <div class="w-24 h-2 bg-slate-700 rounded"></div>
+                    <div class="hidden lg:block platform-perspective relative">
+                        <div class="platform-3d browser-frame">
+                            <div class="browser-frame-bar">
+                                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                                <span class="url-bar">catalog.railtech.uz</span>
                             </div>
-                            <div class="h-7 w-20 bg-slate-800 rounded-lg"></div>
-                            <div class="h-7 w-7 bg-blue-600 rounded-lg flex items-center justify-center">
-                                <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                            </div>
+                            <img src="images/e-platform/catalog.webp" alt="B2B каталог RailTech — 1247 товаров с фильтрами и ценами" loading="lazy" width="1400" height="797">
                         </div>
-                        <div class="grid grid-cols-3 gap-2.5">
-                            <div class="bg-slate-800 rounded-xl p-2.5"><div class="aspect-square bg-slate-700 rounded-lg mb-2 flex items-center justify-center"><svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div><div class="h-1.5 bg-slate-600 rounded w-3/4 mb-1"></div><div class="h-1.5 bg-slate-700 rounded w-1/2 mb-2"></div><div class="h-5 bg-blue-600 rounded-lg"></div></div>
-                            <div class="bg-slate-800 rounded-xl p-2.5"><div class="aspect-square bg-slate-700 rounded-lg mb-2 flex items-center justify-center"><svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><div class="h-1.5 bg-slate-600 rounded w-4/5 mb-1"></div><div class="h-1.5 bg-slate-700 rounded w-2/3 mb-2"></div><div class="h-5 bg-blue-600 rounded-lg"></div></div>
-                            <div class="bg-slate-800 rounded-xl p-2.5"><div class="aspect-square bg-slate-700 rounded-lg mb-2 flex items-center justify-center"><svg class="w-6 h-6 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg></div><div class="h-1.5 bg-slate-600 rounded w-1/2 mb-1"></div><div class="h-1.5 bg-slate-700 rounded w-3/4 mb-2"></div><div class="h-5 bg-slate-700 rounded-lg"></div></div>
-                            <div class="bg-slate-800 rounded-xl p-2.5"><div class="aspect-square bg-slate-700 rounded-lg mb-2"></div><div class="h-1.5 bg-slate-600 rounded w-2/3 mb-1"></div><div class="h-1.5 bg-slate-700 rounded w-1/3 mb-2"></div><div class="h-5 bg-slate-700 rounded-lg"></div></div>
-                            <div class="bg-slate-800 rounded-xl p-2.5"><div class="aspect-square bg-slate-700 rounded-lg mb-2"></div><div class="h-1.5 bg-slate-600 rounded w-3/4 mb-1"></div><div class="h-1.5 bg-slate-700 rounded w-1/2 mb-2"></div><div class="h-5 bg-blue-600 rounded-lg"></div></div>
-                            <div class="bg-slate-800 rounded-xl p-2.5"><div class="aspect-square bg-slate-700 rounded-lg mb-2"></div><div class="h-1.5 bg-slate-600 rounded w-1/2 mb-1"></div><div class="h-1.5 bg-slate-700 rounded w-4/5 mb-2"></div><div class="h-5 bg-blue-600 rounded-lg"></div></div>
+                        <div class="floating-badge" style="top: 15%; right: -10px; animation-delay: 0s;">
+                            <span class="badge-dot bg-emerald-400"></span> 1 247 товаров
+                        </div>
+                        <div class="floating-badge" style="bottom: 18%; left: -10px; animation-delay: 1.5s;">
+                            <span class="badge-dot bg-blue-400"></span> 86 производителей
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ─── Slide 2: CRM / Deals ─── -->
+            <!-- ─── Slide 2: Калькулятор КП ─── -->
             <div class="platform-slide absolute inset-0 flex items-center px-6 py-8 lg:px-10 opacity-0 translate-x-8" role="tabpanel" aria-hidden="true">
-                <div class="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="w-full grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-10 items-center">
+                    <div>
+                        <span class="inline-block bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-purple-500/30" data-i18n="platform_f3_tag">Калькулятор КП</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f3_title">КП с расчётом Landed Cost</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base" data-i18n="platform_f3_desc">Цена автоматически включает логистику, таможенные пошлины, маржу и НДС 12%. Никакого ручного пересчёта.</p>
+                    </div>
+                    <div class="hidden lg:block platform-perspective relative">
+                        <div class="platform-3d browser-frame">
+                            <div class="browser-frame-bar">
+                                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                                <span class="url-bar">b2b.railtech.uz/quotes</span>
+                            </div>
+                            <img src="images/e-platform/quote_calculator.webp" alt="Калькулятор КП RailTech — автоматический расчёт Landed Cost" loading="lazy" width="1400" height="899">
+                        </div>
+                        <div class="floating-badge" style="top: 12%; right: -10px; animation-delay: 0.3s;">
+                            <span class="badge-dot bg-amber-400"></span> НДС 12% авторасчёт
+                        </div>
+                        <div class="floating-badge" style="bottom: 12%; left: -10px; animation-delay: 1.8s;">
+                            <span class="badge-dot bg-purple-400"></span> $847 250 — итого
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Slide 3: CRM / Сделки ─── -->
+            <div class="platform-slide absolute inset-0 flex items-center px-6 py-8 lg:px-10 opacity-0 translate-x-8" role="tabpanel" aria-hidden="true">
+                <div class="w-full grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-10 items-center">
                     <div>
                         <span class="inline-block bg-emerald-500/20 text-emerald-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-emerald-500/30" data-i18n="platform_f2_tag">Сделки</span>
                         <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f2_title">CRM для управления заказами</h3>
                         <p class="text-slate-400 leading-relaxed text-sm sm:text-base" data-i18n="platform_f2_desc">Менеджеры видят все сделки, статусы, документы и историю переписки. Клиент — свои заявки в личном кабинете.</p>
                     </div>
-                    <!-- Mockup: kanban pipeline -->
-                    <div class="hidden lg:block rounded-xl bg-slate-950 border border-slate-800 p-4">
-                        <div class="flex gap-2.5">
-                            <div class="flex-1 space-y-2">
-                                <div class="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-2 px-1">Новые</div>
-                                <div class="bg-slate-800 rounded-lg p-2.5 border-l-2 border-blue-500"><div class="h-2 bg-slate-600 rounded w-4/5 mb-1.5"></div><div class="h-2 bg-slate-700 rounded w-1/2 mb-2"></div><div class="inline-flex items-center gap-1 bg-blue-500/20 rounded px-1.5 py-0.5"><div class="w-1.5 h-1.5 bg-blue-400 rounded-full"></div><div class="h-1.5 w-8 bg-blue-400/50 rounded"></div></div></div>
-                                <div class="bg-slate-800 rounded-lg p-2.5 border-l-2 border-blue-500"><div class="h-2 bg-slate-600 rounded w-3/5 mb-1.5"></div><div class="h-2 bg-slate-700 rounded w-2/3 mb-2"></div><div class="inline-flex items-center gap-1 bg-blue-500/20 rounded px-1.5 py-0.5"><div class="w-1.5 h-1.5 bg-blue-400 rounded-full"></div><div class="h-1.5 w-6 bg-blue-400/50 rounded"></div></div></div>
+                    <div class="hidden lg:block platform-perspective relative">
+                        <div class="platform-3d browser-frame">
+                            <div class="browser-frame-bar">
+                                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                                <span class="url-bar">b2b.railtech.uz/deals</span>
                             </div>
-                            <div class="flex-1 space-y-2">
-                                <div class="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-2 px-1">КП</div>
-                                <div class="bg-slate-800 rounded-lg p-2.5 border-l-2 border-amber-500"><div class="h-2 bg-slate-600 rounded w-3/4 mb-1.5"></div><div class="h-2 bg-slate-700 rounded w-1/3 mb-2"></div><div class="inline-flex items-center gap-1 bg-amber-500/20 rounded px-1.5 py-0.5"><div class="w-1.5 h-1.5 bg-amber-400 rounded-full"></div><div class="h-1.5 w-10 bg-amber-400/50 rounded"></div></div></div>
-                                <div class="bg-slate-800 rounded-lg p-2.5 border-l-2 border-amber-500"><div class="h-2 bg-slate-600 rounded w-1/2 mb-1.5"></div><div class="h-2 bg-slate-700 rounded w-4/5 mb-2"></div><div class="inline-flex items-center gap-1 bg-amber-500/20 rounded px-1.5 py-0.5"><div class="w-1.5 h-1.5 bg-amber-400 rounded-full"></div><div class="h-1.5 w-6 bg-amber-400/50 rounded"></div></div></div>
-                            </div>
-                            <div class="flex-1 space-y-2">
-                                <div class="text-[9px] font-bold text-slate-500 uppercase tracking-wider mb-2 px-1">Закрыто</div>
-                                <div class="bg-slate-800 rounded-lg p-2.5 border-l-2 border-emerald-500"><div class="h-2 bg-slate-600 rounded w-4/5 mb-1.5"></div><div class="h-2 bg-slate-700 rounded w-1/2 mb-2"></div><div class="inline-flex items-center gap-1 bg-emerald-500/20 rounded px-1.5 py-0.5"><div class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div><div class="h-1.5 w-7 bg-emerald-400/50 rounded"></div></div></div>
-                                <div class="bg-slate-800 rounded-lg p-2.5 border-l-2 border-emerald-500"><div class="h-2 bg-slate-600 rounded w-2/3 mb-1.5"></div><div class="h-2 bg-slate-700 rounded w-4/5 mb-2"></div><div class="inline-flex items-center gap-1 bg-emerald-500/20 rounded px-1.5 py-0.5"><div class="w-1.5 h-1.5 bg-emerald-400 rounded-full"></div><div class="h-1.5 w-9 bg-emerald-400/50 rounded"></div></div></div>
-                            </div>
+                            <img src="images/e-platform/crm_deal.webp" alt="CRM RailTech — управление сделками и калькулятор КП" loading="lazy" width="1400" height="798">
+                        </div>
+                        <div class="floating-badge" style="top: 10%; right: -10px; animation-delay: 0.5s;">
+                            <span class="badge-dot bg-emerald-400"></span> $272 353 pipeline
+                        </div>
+                        <div class="floating-badge" style="bottom: 15%; left: -10px; animation-delay: 2s;">
+                            <span class="badge-dot bg-blue-400"></span> PDF-экспорт в 1 клик
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ─── Slide 3: Landed Cost / Quotes ─── -->
+            <!-- ─── Slide 4: Smart Import ─── -->
             <div class="platform-slide absolute inset-0 flex items-center px-6 py-8 lg:px-10 opacity-0 translate-x-8" role="tabpanel" aria-hidden="true">
-                <div class="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="w-full grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-10 items-center">
                     <div>
-                        <span class="inline-block bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-purple-500/30" data-i18n="platform_f3_tag">Коммерческие предложения</span>
-                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f3_title">КП с расчётом Landed Cost</h3>
-                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base" data-i18n="platform_f3_desc">Цена автоматически включает логистику, таможенные пошлины, маржу и НДС 12%. Никакого ручного пересчёта.</p>
+                        <span class="inline-block bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-cyan-500/30" data-i18n="platform_f5_tag">Smart Import</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f5_title">Загрузка Excel и Smart Match</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base" data-i18n="platform_f5_desc">Клиент загружает Excel с позициями, система автоматически сопоставляет их с номенклатурой каталога по Smart Match алгоритму.</p>
                     </div>
-                    <!-- Mockup: price breakdown bars -->
-                    <div class="hidden lg:block rounded-xl bg-slate-950 border border-slate-800 p-5">
-                        <div class="text-xs text-slate-400 font-semibold mb-4 uppercase tracking-wider">Структура цены / Landed Cost</div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3"><div class="text-xs text-slate-500 w-28 shrink-0">Цена FCA</div><div class="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden"><div class="h-full bg-blue-600 rounded-full" style="width:55%"></div></div><div class="text-xs text-white font-mono w-10 text-right">55%</div></div>
-                            <div class="flex items-center gap-3"><div class="text-xs text-slate-500 w-28 shrink-0">Логистика DAP</div><div class="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden"><div class="h-full bg-blue-500 rounded-full" style="width:20%"></div></div><div class="text-xs text-white font-mono w-10 text-right">20%</div></div>
-                            <div class="flex items-center gap-3"><div class="text-xs text-slate-500 w-28 shrink-0">Таможня</div><div class="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden"><div class="h-full bg-slate-500 rounded-full" style="width:10%"></div></div><div class="text-xs text-white font-mono w-10 text-right">10%</div></div>
-                            <div class="flex items-center gap-3"><div class="text-xs text-slate-500 w-28 shrink-0">Маржа</div><div class="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden"><div class="h-full bg-purple-500 rounded-full" style="width:8%"></div></div><div class="text-xs text-white font-mono w-10 text-right">8%</div></div>
-                            <div class="flex items-center gap-3"><div class="text-xs text-slate-500 w-28 shrink-0">НДС 12%</div><div class="flex-1 bg-slate-800 rounded-full h-4 overflow-hidden"><div class="h-full bg-amber-500 rounded-full" style="width:7%"></div></div><div class="text-xs text-white font-mono w-10 text-right">~7%</div></div>
-                            <div class="border-t border-slate-700 pt-3 flex justify-between items-center"><div class="text-sm text-white font-bold">Итого с НДС</div><div class="text-sm text-blue-400 font-extrabold font-mono bg-blue-500/10 px-3 py-1 rounded-lg">= Итоговая цена</div></div>
+                    <div class="hidden lg:block platform-perspective relative">
+                        <div class="platform-3d browser-frame">
+                            <div class="browser-frame-bar">
+                                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                                <span class="url-bar">b2b.railtech.uz/sourcing</span>
+                            </div>
+                            <img src="images/e-platform/sourcing.webp" alt="Smart Import — автоматическое сопоставление Excel с каталогом" loading="lazy" width="1400" height="797">
+                        </div>
+                        <div class="floating-badge" style="top: 12%; right: -10px; animation-delay: 0.7s;">
+                            <span class="badge-dot bg-cyan-400"></span> Smart Match 92%
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ─── Slide 4: KYC / Access ─── -->
+            <!-- ─── Slide 5: Личный кабинет ─── -->
             <div class="platform-slide absolute inset-0 flex items-center px-6 py-8 lg:px-10 opacity-0 translate-x-8" role="tabpanel" aria-hidden="true">
-                <div class="w-full grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="w-full grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-10 items-center">
                     <div>
-                        <span class="inline-block bg-rose-500/20 text-rose-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-rose-500/30" data-i18n="platform_f4_tag">Верификация</span>
-                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f4_title">KYC и управление доступом</h3>
-                        <p class="text-slate-400 leading-relaxed mb-6 text-sm sm:text-base" data-i18n="platform_f4_desc">Цены и документы видны только верифицированным партнёрам. Гость видит каталог, клиент — свои сделки, менеджер — назначенные заявки.</p>
+                        <span class="inline-block bg-rose-500/20 text-rose-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-rose-500/30" data-i18n="platform_f4_tag">Личный кабинет</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f4_title">Кабинет партнёра с KYC</h3>
+                        <p class="text-slate-400 leading-relaxed mb-6 text-sm sm:text-base" data-i18n="platform_f4_desc">Цены и документы видны только верифицированным партнёрам. Клиент управляет сделками, загружает Excel и отслеживает статусы.</p>
                         <a href="pages/coming-soon.html" class="inline-flex items-center gap-2 bg-white text-slate-900 text-sm font-semibold px-5 py-2.5 rounded-lg hover:bg-slate-100 active:scale-95 transition shadow-lg" data-i18n="nav_cabinet">Войти</a>
                     </div>
-                    <!-- Mockup: role access grid -->
-                    <div class="hidden lg:block rounded-xl bg-slate-950 border border-slate-800 p-4">
-                        <div class="text-xs text-slate-400 font-semibold mb-3 uppercase tracking-wider">Уровни доступа</div>
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-3 bg-slate-800 rounded-xl px-4 py-3"><div class="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center text-xs text-slate-400 font-bold shrink-0">G</div><div class="flex-1"><div class="text-xs font-semibold text-slate-300 mb-1">Гость</div><div class="flex gap-1.5"><div class="h-1.5 w-12 bg-blue-500 rounded-full"></div><div class="h-1.5 w-8 bg-slate-700 rounded-full"></div><div class="h-1.5 w-8 bg-slate-700 rounded-full"></div></div></div></div>
-                            <div class="flex items-center gap-3 bg-slate-800 rounded-xl px-4 py-3"><div class="w-8 h-8 rounded-full bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-xs text-blue-400 font-bold shrink-0">C</div><div class="flex-1"><div class="text-xs font-semibold text-slate-300 mb-1">Клиент</div><div class="flex gap-1.5"><div class="h-1.5 w-12 bg-blue-500 rounded-full"></div><div class="h-1.5 w-12 bg-blue-500 rounded-full"></div><div class="h-1.5 w-8 bg-slate-700 rounded-full"></div></div></div></div>
-                            <div class="flex items-center gap-3 bg-slate-800 rounded-xl px-4 py-3"><div class="w-8 h-8 rounded-full bg-emerald-600/30 border border-emerald-500/40 flex items-center justify-center text-xs text-emerald-400 font-bold shrink-0">M</div><div class="flex-1"><div class="text-xs font-semibold text-slate-300 mb-1">Менеджер</div><div class="flex gap-1.5"><div class="h-1.5 w-12 bg-blue-500 rounded-full"></div><div class="h-1.5 w-12 bg-blue-500 rounded-full"></div><div class="h-1.5 w-12 bg-blue-500 rounded-full"></div></div></div></div>
-                            <div class="flex items-center gap-3 bg-slate-800 rounded-xl px-4 py-3"><div class="w-8 h-8 rounded-full bg-amber-500/30 border border-amber-500/40 flex items-center justify-center text-xs text-amber-400 font-bold shrink-0">A</div><div class="flex-1"><div class="text-xs font-semibold text-slate-300 mb-1">Администратор</div><div class="flex gap-1.5"><div class="h-1.5 w-12 bg-amber-500 rounded-full"></div><div class="h-1.5 w-12 bg-amber-500 rounded-full"></div><div class="h-1.5 w-16 bg-amber-500 rounded-full"></div></div></div></div>
+                    <div class="hidden lg:block platform-perspective relative">
+                        <div class="platform-3d browser-frame">
+                            <div class="browser-frame-bar">
+                                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                                <span class="url-bar">b2b.railtech.uz/dashboard</span>
+                            </div>
+                            <img src="images/e-platform/client_dashboard.webp" alt="Личный кабинет клиента RailTech — сделки и быстрые действия" loading="lazy" width="1400" height="799">
+                        </div>
+                        <div class="floating-badge" style="top: 15%; right: -10px; animation-delay: 0.4s;">
+                            <span class="badge-dot bg-rose-400"></span> 24 сделки
+                        </div>
+                        <div class="floating-badge" style="bottom: 18%; left: -10px; animation-delay: 1.9s;">
+                            <span class="badge-dot bg-emerald-400"></span> $248 700 объём
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ─── Slide 6: Админ-панель ─── -->
+            <div class="platform-slide absolute inset-0 flex items-center px-6 py-8 lg:px-10 opacity-0 translate-x-8" role="tabpanel" aria-hidden="true">
+                <div class="w-full grid lg:grid-cols-[1fr_1.4fr] gap-8 lg:gap-10 items-center">
+                    <div>
+                        <span class="inline-block bg-amber-500/20 text-amber-300 text-xs font-bold px-3 py-1 rounded-full mb-4 border border-amber-500/30" data-i18n="platform_f6_tag">Админ-панель</span>
+                        <h3 class="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white mb-4" data-i18n="platform_f6_title">Полный контроль системы</h3>
+                        <p class="text-slate-400 leading-relaxed text-sm sm:text-base" data-i18n="platform_f6_desc">Мониторинг пайплайна, управление пользователями, номенклатурой и настройками. Лог активности в реальном времени.</p>
+                    </div>
+                    <div class="hidden lg:block platform-perspective relative">
+                        <div class="platform-3d browser-frame">
+                            <div class="browser-frame-bar">
+                                <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+                                <span class="url-bar">b2b.railtech.uz/admin</span>
+                            </div>
+                            <img src="images/e-platform/admin_dashboard.webp" alt="Админ-панель RailTech — мониторинг и управление системой" loading="lazy" width="1400" height="798">
+                        </div>
+                        <div class="floating-badge" style="top: 10%; right: -10px; animation-delay: 0.6s;">
+                            <span class="badge-dot bg-amber-400"></span> $571 200 pipeline
+                        </div>
+                        <div class="floating-badge" style="bottom: 15%; left: -10px; animation-delay: 2.1s;">
+                            <span class="badge-dot bg-emerald-400"></span> 234 пользователя
                         </div>
                     </div>
                 </div>
